@@ -29,6 +29,9 @@ public class PoDetail implements Serializable{
 	@Column(name="packing_date")
 	private Date packingDate;
 	
+	@Column(name="mfg_date")
+	private Date mfgDate;
+	
 	@Column(name="item_id")
 	private int itemId;
 	
@@ -43,6 +46,15 @@ public class PoDetail implements Serializable{
 	
 	@Column(name="po_leakage_qty")
 	private int poLeakageQty;
+
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
+	public Date getMfgDate() {
+		return mfgDate;
+	}
+
+	public void setMfgDate(Date mfgDate) {
+		this.mfgDate = mfgDate;
+	}
 
 	public int getPoDetailId() {
 		return poDetailId;
@@ -119,10 +131,9 @@ public class PoDetail implements Serializable{
 	@Override
 	public String toString() {
 		return "PoDetail [poDetailId=" + poDetailId + ", poHeaderId=" + poHeaderId + ", batchNo=" + batchNo
-				+ ", packingDate=" + packingDate + ", itemId=" + itemId + ", itemQty=" + itemQty + ", shortNo="
-				+ shortNo + ", extraNo=" + extraNo + ", poLeakageQty=" + poLeakageQty + "]";
+				+ ", packingDate=" + packingDate + ", mfgDate=" + mfgDate + ", itemId=" + itemId + ", itemQty="
+				+ itemQty + ", shortNo=" + shortNo + ", extraNo=" + extraNo + ", poLeakageQty=" + poLeakageQty + "]";
 	}
-	
-	
+    
 	
 }

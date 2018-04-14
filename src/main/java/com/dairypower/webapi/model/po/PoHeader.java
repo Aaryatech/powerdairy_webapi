@@ -31,6 +31,9 @@ public class PoHeader implements Serializable{
 	@Column(name="po_datetime")
 	private String poDatetime;
 	
+	@Column(name="crates_recieved_qty")
+	private int cratesRecievedQty;
+	
 	@Column(name="po_remarks")
 	private String poRemarks;
 	
@@ -95,6 +98,14 @@ public class PoHeader implements Serializable{
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+    
+	public int getCratesRecievedQty() {
+		return cratesRecievedQty;
+	}
+
+	public void setCratesRecievedQty(int cratesRecievedQty) {
+		this.cratesRecievedQty = cratesRecievedQty;
 	}
 
 	@Override

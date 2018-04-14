@@ -26,6 +26,9 @@ public class GetPoDetail implements Serializable{
 	
 	@Column(name="packing_date")
 	private Date packingDate;
+
+	@Column(name="mfg_date")
+	private Date mfgDate;
 	
 	@Column(name="item_id")
 	private int itemId;
@@ -44,6 +47,15 @@ public class GetPoDetail implements Serializable{
 	
 	@Column(name="po_leakage_qty")
 	private int poLeakageQty;
+
+	
+	public Date getMfgDate() {
+		return mfgDate;
+	}
+
+	public void setMfgDate(Date mfgDate) {
+		this.mfgDate = mfgDate;
+	}
 
 	public int getPoDetailId() {
 		return poDetailId;
