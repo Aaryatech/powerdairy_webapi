@@ -28,6 +28,15 @@ public class Item implements Serializable{
 	@Column(name="item_cat_id")
 	private int itemCatId;
 	
+	@Column(name="purchase_rate")
+	private float purchaseRate;
+	
+	@Column(name="min_qty")
+	private int minQty;
+	
+	@Column(name="max_qty")
+	private int maxQty;
+	
 	@Column(name="hub_exp_days")
 	private int hubExpDays;
 	
@@ -51,6 +60,32 @@ public class Item implements Serializable{
 	
 	@Column(name="is_used")
 	private int isUsed;
+	
+	
+
+	public float getPurchaseRate() {
+		return purchaseRate;
+	}
+
+	public int getMinQty() {
+		return minQty;
+	}
+
+	public int getMaxQty() {
+		return maxQty;
+	}
+
+	public void setPurchaseRate(float purchaseRate) {
+		this.purchaseRate = purchaseRate;
+	}
+
+	public void setMinQty(int minQty) {
+		this.minQty = minQty;
+	}
+
+	public void setMaxQty(int maxQty) {
+		this.maxQty = maxQty;
+	}
 
 	public int getItemId() {
 		return itemId;
@@ -155,11 +190,10 @@ public class Item implements Serializable{
 	@Override
 	public String toString() {
 		return "Item [itemId=" + itemId + ", itemCode=" + itemCode + ", itemName=" + itemName + ", itemCatId="
-				+ itemCatId + ", hubExpDays=" + hubExpDays + ", retailExpDays=" + retailExpDays + ", sgstPer=" + sgstPer
+				+ itemCatId + ", purchaseRate=" + purchaseRate + ", minQty=" + minQty + ", maxQty=" + maxQty
+				+ ", hubExpDays=" + hubExpDays + ", retailExpDays=" + retailExpDays + ", sgstPer=" + sgstPer
 				+ ", cgstPer=" + cgstPer + ", igstPer=" + igstPer + ", hsnCode=" + hsnCode + ", uomId=" + uomId
 				+ ", isUsed=" + isUsed + "]";
 	}
-	
-	
-
+    
 }
