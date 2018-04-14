@@ -1,0 +1,100 @@
+package com.dairypower.webapi.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.dairypower.webapi.model.po.GetPoDetail;
+import com.dairypower.webapi.model.po.GetPoHeader;
+import com.dairypower.webapi.model.po.PoDetail;
+import com.dairypower.webapi.model.po.PoHeader;
+import com.dairypower.webapi.repository.GetPoDetailRepository;
+import com.dairypower.webapi.repository.GetPoHeaderRepository;
+import com.dairypower.webapi.repository.PoDetailRepository;
+import com.dairypower.webapi.repository.PoHeaderRepository;
+
+@RestController
+public class PoController {
+
+	@Autowired
+	PoHeaderRepository poHeaderRepository;
+
+	@Autowired
+	PoDetailRepository poDetailRepository;
+
+	@Autowired
+	GetPoHeaderRepository getPoHeaderRepository;
+	
+	@Autowired
+	GetPoDetailRepository getPoDetailRepository;
+	
+	// ----------------------------Save Po---------------------------
+	@RequestMapping(value = { "/savePo" }, method = RequestMethod.POST)
+	public @ResponseBody PoHeader saveBill(@RequestBody PoHeader poHeader) {
+
+		PoHeader poHeadeRes = null;
+		List<PoDetail> poDetailList = new ArrayList<PoDetail>();
+		try {
+			poHeadeRes = poHeaderRepository.saveAndFlush(poHeader);
+			for (PoDetail poDetail : poHeader.getPoDetailList()) {
+				poDetail.setPoHeaderId(poHeadeRes.getPoHeaderId());
+				PoDetail poDetailRes = poDetailRepository.saveAndFlush(poDetail);
+				poDetailList.add(poDetailRes);
+			}
+			poHeadeRes.setPoDetailList(poDetailList);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return poHeadeRes;
+
+	}
+
+	// ----------------------------------------------------------------------
+	@RequestMapping(value = "/getAllPoHeader", method = RequestMethod.GET)
+	public @ResponseBody List<GetPoHeader> getAllPoHeaders() {
+
+		List<GetPoHeader> poHeaderList;
+		try {
+			poHeaderList = getPoHeaderRepository.findAllPoHeaders();
+		}
+		catch (Exception e) {
+			poHeaderList=new ArrayList<>();
+			e.printStackTrace();
+
+		}
+		return poHeaderList;
+
+	}
+	//--------------------------------------------------------------------------
+	// ----------------------------------------------------------------------
+		@RequestMapping(value = "/getPoHeaderDetails", method = RequestMethod.POST)
+		public @ResponseBody GetPoHeader getAllPoHeaderDetails(@RequestParam("poHeaderId") int poHeaderId) {
+
+			GetPoHeader poHeader=null;
+			try {
+				poHeader= getPoHeaderRepository.findPoHeadersAndDetails(poHeaderId);
+				
+				List<GetPoDetail> poDetailList=getPoDetailRepository.findAllByHeaderId(poHeaderId);
+				
+				poHeader.setPoDetailList(poDetailList);
+			}
+			catch (Exception e) {
+				poHeader=new GetPoHeader();
+				e.printStackTrace();
+
+			}
+			return poHeader;
+
+		}
+		//--------------------------------------------------------------------------
+}
