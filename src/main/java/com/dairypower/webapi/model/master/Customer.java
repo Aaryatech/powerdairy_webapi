@@ -38,6 +38,12 @@ public class Customer implements Serializable{
 	
 	@Column(name="cust_address")
 	private String custAddress;
+	
+	@Column(name="pan_no")
+	private String panNo;
+	
+	@Column(name="fssai_no")
+	private String fssaiNo;
 	  
 	@Column(name="cust_bank_acc_no")
 	private String custBankAccNo;
@@ -74,9 +80,25 @@ public class Customer implements Serializable{
 	  
 	@Column(name="veh_id")
 	private int vehId;
-	
+
 	@Column(name="is_used")
 	private int isUsed;
+	
+	public String getPanNo() {
+		return panNo;
+	}
+
+	public String getFssaiNo() {
+		return fssaiNo;
+	}
+
+	public void setPanNo(String panNo) {
+		this.panNo = panNo;
+	}
+
+	public void setFssaiNo(String fssaiNo) {
+		this.fssaiNo = fssaiNo;
+	}
 
 	public int getCustId() {
 		return custId;
@@ -250,14 +272,12 @@ public class Customer implements Serializable{
 	public String toString() {
 		return "Customer [custId=" + custId + ", custName=" + custName + ", custType=" + custType + ", custLandlineNo="
 				+ custLandlineNo + ", custMobNo=" + custMobNo + ", custEmailId=" + custEmailId + ", custRoot="
-				+ custRoot + ", custAddress=" + custAddress + ", custBankAccNo=" + custBankAccNo + ", custBankIfsc="
-				+ custBankIfsc + ", custBankName=" + custBankName + ", custCap=" + custCap + ", custGstNo=" + custGstNo
-				+ ", custReference=" + custReference + ", refMobNo=" + refMobNo + ", custApprovedBy=" + custApprovedBy
-				+ ", rsHeaderId=" + rsHeaderId + ", cratesOpBal=" + cratesOpBal + ", cratesCap=" + cratesCap
-				+ ", vehId=" + vehId + ", isUsed=" + isUsed + "]";
+				+ custRoot + ", custAddress=" + custAddress + ", panNo=" + panNo + ", fssaiNo=" + fssaiNo
+				+ ", custBankAccNo=" + custBankAccNo + ", custBankIfsc=" + custBankIfsc + ", custBankName="
+				+ custBankName + ", custCap=" + custCap + ", custGstNo=" + custGstNo + ", custReference="
+				+ custReference + ", refMobNo=" + refMobNo + ", custApprovedBy=" + custApprovedBy + ", rsHeaderId="
+				+ rsHeaderId + ", cratesOpBal=" + cratesOpBal + ", cratesCap=" + cratesCap + ", vehId=" + vehId
+				+ ", isUsed=" + isUsed + "]";
 	}
-	
-	
-	
 	
 }

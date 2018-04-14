@@ -37,6 +37,12 @@ public class GetCustomer implements Serializable{
 	@Column(name="cust_address")
 	private String custAddress;
 	  
+	@Column(name="pan_no")
+	private String panNo;
+	
+	@Column(name="fssai_no")
+	private String fssaiNo;
+	
 	@Column(name="cust_bank_acc_no")
 	private String custBankAccNo;
 	
@@ -78,6 +84,31 @@ public class GetCustomer implements Serializable{
 	
 	@Column(name="is_used")
 	private int isUsed;
+
+	
+	public String getPanNo() {
+		return panNo;
+	}
+
+	public String getFssaiNo() {
+		return fssaiNo;
+	}
+
+	public String getVehName() {
+		return vehName;
+	}
+
+	public void setPanNo(String panNo) {
+		this.panNo = panNo;
+	}
+
+	public void setFssaiNo(String fssaiNo) {
+		this.fssaiNo = fssaiNo;
+	}
+
+	public void setVehName(String vehName) {
+		this.vehName = vehName;
+	}
 
 	public int getCustId() {
 		return custId;
@@ -251,12 +282,13 @@ public class GetCustomer implements Serializable{
 	public String toString() {
 		return "GetCustomer [custId=" + custId + ", custName=" + custName + ", custType=" + custType
 				+ ", custLandlineNo=" + custLandlineNo + ", custMobNo=" + custMobNo + ", custEmailId=" + custEmailId
-				+ ", custRoot=" + custRoot + ", custAddress=" + custAddress + ", custBankAccNo=" + custBankAccNo
-				+ ", custBankIfsc=" + custBankIfsc + ", custBankName=" + custBankName + ", custCap=" + custCap
-				+ ", custGstNo=" + custGstNo + ", custReference=" + custReference + ", refMobNo=" + refMobNo
-				+ ", custApprovedBy=" + custApprovedBy + ", rsHeaderId=" + rsHeaderId + ", cratesOpBal=" + cratesOpBal
-				+ ", cratesCap=" + cratesCap + ", vehId=" + vehId + ", isUsed=" + isUsed + "]";
+				+ ", custRoot=" + custRoot + ", custAddress=" + custAddress + ", panNo=" + panNo + ", fssaiNo="
+				+ fssaiNo + ", custBankAccNo=" + custBankAccNo + ", custBankIfsc=" + custBankIfsc + ", custBankName="
+				+ custBankName + ", custCap=" + custCap + ", custGstNo=" + custGstNo + ", custReference="
+				+ custReference + ", refMobNo=" + refMobNo + ", custApprovedBy=" + custApprovedBy + ", rsHeaderId="
+				+ rsHeaderId + ", cratesOpBal=" + cratesOpBal + ", cratesCap=" + cratesCap + ", vehId=" + vehId
+				+ ", vehName=" + vehName + ", isUsed=" + isUsed + "]";
 	}
-	
-	
+
+    
 }
