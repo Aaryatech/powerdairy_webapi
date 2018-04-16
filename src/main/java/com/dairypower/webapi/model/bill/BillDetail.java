@@ -24,7 +24,7 @@ public class BillDetail implements Serializable{
 	private String batchNo;
 	
 	@Column(name="item_id")
-	private int itemId;
+	private int itemId; 
 	
 	@Column(name="rate")
 	private float rate;
