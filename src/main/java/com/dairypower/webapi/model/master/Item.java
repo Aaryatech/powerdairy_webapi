@@ -18,7 +18,7 @@ public class Item implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="item_id")
 	private int itemId;
-	
+	 
 	@Column(name="item_code")
 	private String itemCode;
 	
