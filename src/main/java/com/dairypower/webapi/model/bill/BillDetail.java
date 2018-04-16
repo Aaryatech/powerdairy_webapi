@@ -16,7 +16,7 @@ public class BillDetail implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="bill_detail_id")
 	private int billDetailId; 
-	
+	 
 	@Column(name="bill_temp_id")
 	private int billTempId;
 	
