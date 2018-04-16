@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dairypower.webapi.model.master.Currency;
 import com.dairypower.webapi.model.master.Customer;
 import com.dairypower.webapi.model.master.CustomerType;
 import com.dairypower.webapi.model.master.GetCustomer;
@@ -27,6 +28,7 @@ import com.dairypower.webapi.model.master.Uom;
 import com.dairypower.webapi.model.master.User;
 import com.dairypower.webapi.model.master.UserType;
 import com.dairypower.webapi.model.master.Vehicle;
+import com.dairypower.webapi.repository.CurrencyRepository;
 import com.dairypower.webapi.repository.CustomerRepository;
 import com.dairypower.webapi.repository.CustomerTypeRepository;
 import com.dairypower.webapi.repository.GetCustomerRepository;
@@ -91,6 +93,9 @@ public class MasterController {
 	
 	@Autowired
 	MfgReturnRepository mfgReturnRepository;
+	
+	@Autowired
+	CurrencyRepository currencyRepository;
 	
 	// ----------------------------Save Item---------------------------
 	@RequestMapping(value = { "/saveItem" }, method = RequestMethod.POST)
@@ -519,6 +524,7 @@ public class MasterController {
 	}
 
 	// ------------------------------------------------------------------------
+
 	// ------------------------Getting Item by Id-----------------------
 	@RequestMapping(value = { "/getItemById" }, method = RequestMethod.POST)
 	public @ResponseBody GetItem getItemById(@RequestParam("itemId") int itemId) {
