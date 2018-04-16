@@ -643,4 +643,18 @@ public class MasterController {
 				}
 
 				// --------------------------------------------------------------------------------------
+				@RequestMapping(value = "/getAllRsHeader", method = RequestMethod.GET)
+				public @ResponseBody List<RSHeader> getAllRsHeader() {
+
+					List<RSHeader> rsHeaderList;
+					try {
+						rsHeaderList = rsHeaderRepository.findAllByIsUsed(0);
+					} catch (Exception e) {
+						rsHeaderList = new ArrayList<>();
+						 
+						e.printStackTrace();
+
+					} 
+					return rsHeaderList;
+				}
 }

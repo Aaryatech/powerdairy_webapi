@@ -84,6 +84,17 @@ public class Customer implements Serializable{
 	@Column(name="is_used")
 	private int isUsed;
 	
+	@Column(name="outstannding_amt")
+	private float outstandingAmt;
+	
+	public float getOutstandingAmt() {
+		return outstandingAmt;
+	}
+
+	public void setOutstandingAmt(float outstandingAmt) {
+		this.outstandingAmt = outstandingAmt;
+	}
+
 	public String getPanNo() {
 		return panNo;
 	}
