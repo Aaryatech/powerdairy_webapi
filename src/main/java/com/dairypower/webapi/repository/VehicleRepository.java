@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dairypower.webapi.model.master.Vehicle;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer>{
-
+	
 	@Transactional
 	@Modifying
-	@Query(" DELETE FROM Vehicle WHERE  vehId=:vehId")
+	@Query("UPDATE Vehicle SET isUsed=1  WHERE vehId=:vehId")
 	int deleteVehicle(@Param("vehId")int vehId);
 
 	List<Vehicle> findAllByIsUsed(int i);

@@ -17,7 +17,7 @@ public interface UomRepository extends JpaRepository<Uom, Integer>{
 
 	@Transactional
 	@Modifying
-	@Query(" DELETE FROM Uom WHERE  uomId=:uomId")
+	@Query("UPDATE Uom SET isUsed=1  WHERE uomId=:uomId")
 	int deleteUom(@Param("uomId")int uomId);
 
 	List<Uom> findAllByIsUsed(int i);

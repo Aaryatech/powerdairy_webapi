@@ -14,7 +14,7 @@ public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Inte
 
 	@Transactional
 	@Modifying
-	@Query(" DELETE FROM ItemCategory WHERE  catId=:catId")
+	@Query("UPDATE ItemCategory SET isUsed=1  WHERE catId=:catId")
 	int deleteItemCategory(@Param("catId") int catId);
 
 	Iterable<ItemCategory> findAllByIsUsed(int i);

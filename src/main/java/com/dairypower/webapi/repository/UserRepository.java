@@ -13,9 +13,10 @@ import com.dairypower.webapi.model.master.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
+	
 	@Transactional
 	@Modifying
-	@Query(" DELETE FROM User WHERE  userId=:userId")
+	@Query("UPDATE User SET isUsed=1  WHERE userId=:userId")	
 	int deleteUser(@Param("userId")int userId);
 
 	User findUserByUserId(int userId);
