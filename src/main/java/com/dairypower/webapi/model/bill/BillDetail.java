@@ -21,7 +21,7 @@ public class BillDetail implements Serializable{
 	private int billTempId;
 	
 	@Column(name="batch_no")
-	private int batchNo;
+	private String batchNo;
 	
 	@Column(name="item_id")
 	private int itemId;
@@ -63,11 +63,11 @@ public class BillDetail implements Serializable{
 		this.billTempId = billTempId;
 	}
 
-	public int getBatchNo() {
+	public String getBatchNo() {
 		return batchNo;
 	}
 
-	public void setBatchNo(int batchNo) {
+	public void setBatchNo(String batchNo) {
 		this.batchNo = batchNo;
 	}
 

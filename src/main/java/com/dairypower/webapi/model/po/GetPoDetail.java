@@ -22,7 +22,7 @@ public class GetPoDetail implements Serializable{
 	private int poHeaderId;
 	
 	@Column(name="batch_no")
-	private int batchNo;
+	private String batchNo;
 	
 	@Column(name="packing_date")
 	private Date packingDate;
@@ -73,11 +73,11 @@ public class GetPoDetail implements Serializable{
 		this.poHeaderId = poHeaderId;
 	}
 
-	public int getBatchNo() {
+	public String getBatchNo() {
 		return batchNo;
 	}
 
-	public void setBatchNo(int batchNo) {
+	public void setBatchNo(String batchNo) {
 		this.batchNo = batchNo;
 	}
 	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
