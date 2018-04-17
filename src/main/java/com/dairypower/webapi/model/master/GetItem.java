@@ -184,13 +184,39 @@ public class GetItem implements Serializable{
 		return serialVersionUID;
 	}
 
+	public float getPurchaseRate() {
+		return purchaseRate;
+	}
+
+	public int getMinQty() {
+		return minQty;
+	}
+
+	public int getMaxQty() {
+		return maxQty;
+	}
+
+	public void setPurchaseRate(float purchaseRate) {
+		this.purchaseRate = purchaseRate;
+	}
+
+	public void setMinQty(int minQty) {
+		this.minQty = minQty;
+	}
+
+	public void setMaxQty(int maxQty) {
+		this.maxQty = maxQty;
+	}
+
 	@Override
 	public String toString() {
 		return "GetItem [itemId=" + itemId + ", itemCode=" + itemCode + ", itemName=" + itemName + ", itemCatId="
-				+ itemCatId + ", catName=" + catName + ", hubExpDays=" + hubExpDays + ", retailExpDays=" + retailExpDays
+				+ itemCatId + ", catName=" + catName + ", purchaseRate=" + purchaseRate + ", minQty=" + minQty
+				+ ", maxQty=" + maxQty + ", hubExpDays=" + hubExpDays + ", retailExpDays=" + retailExpDays
 				+ ", sgstPer=" + sgstPer + ", cgstPer=" + cgstPer + ", igstPer=" + igstPer + ", hsnCode=" + hsnCode
 				+ ", uomId=" + uomId + ", uomName=" + uomName + ", isUsed=" + isUsed + "]";
 	}
-	
+
+    
 	
 }

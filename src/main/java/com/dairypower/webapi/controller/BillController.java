@@ -67,11 +67,11 @@ public class BillController {
 	// ----------------------------------------------------------------------
 			// ----------------------------------------------------------------------
 			@RequestMapping(value = "/getAllBillHeaders", method = RequestMethod.GET)
-			public @ResponseBody List<GetBillHeader> getAllBillHeaders() {
+			public @ResponseBody List<GetBillHeader> getAllBillHeaders(@RequestParam("fromDate") String fromDate,@RequestParam("toDate") String toDate) {
 
 				List<GetBillHeader> getBillHeaderList;
 				try {
-					getBillHeaderList = getBillHeaderRepository.findAllBillHeaders();
+					getBillHeaderList = getBillHeaderRepository.findAllBillHeaders(fromDate,toDate);
 				}
 				catch (Exception e) {
 					getBillHeaderList=new ArrayList<>();
