@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
-@Table(name="t_po_detail")
+@Table(name="t_po_details")
 public class PoDetail implements Serializable{
 
 	@Id
@@ -46,6 +46,12 @@ public class PoDetail implements Serializable{
 	
 	@Column(name="po_leakage_qty")
 	private int poLeakageQty;
+	
+	@Column(name="rate")
+	private float rate;
+
+	@Column(name="is_used")
+	private int isUsed;
 
 	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public Date getMfgDate() {
@@ -128,11 +134,28 @@ public class PoDetail implements Serializable{
 		this.poLeakageQty = poLeakageQty;
 	}
 
+	public float getRate() {
+		return rate;
+	}
+
+	public void setRate(float rate) {
+		this.rate = rate;
+	}
+
+	public int getIsUsed() {
+		return isUsed;
+	}
+
+	public void setIsUsed(int isUsed) {
+		this.isUsed = isUsed;
+	}
+
 	@Override
 	public String toString() {
 		return "PoDetail [poDetailId=" + poDetailId + ", poHeaderId=" + poHeaderId + ", batchNo=" + batchNo
 				+ ", packingDate=" + packingDate + ", mfgDate=" + mfgDate + ", itemId=" + itemId + ", itemQty="
-				+ itemQty + ", shortNo=" + shortNo + ", extraNo=" + extraNo + ", poLeakageQty=" + poLeakageQty + "]";
+				+ itemQty + ", shortNo=" + shortNo + ", extraNo=" + extraNo + ", poLeakageQty=" + poLeakageQty
+				+ ", rate=" + rate + ", isUsed=" + isUsed + "]";
 	}
     
 	

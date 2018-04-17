@@ -38,8 +38,11 @@ public class GetPoHeader implements Serializable{
 	@Column(name="user_name")
 	private String userName;
 
-	@Column(name="crates_recieved_qty")
+	@Column(name="crates_received_qty")
 	private int cratesRecievedQty;
+	
+	@Column(name="po_total")
+	private float poTotal;
 	
 	@Transient
 	List<GetPoDetail> poDetailList;
@@ -116,11 +119,20 @@ public class GetPoHeader implements Serializable{
 		this.userName = userName;
 	}
 
+	public float getPoTotal() {
+		return poTotal;
+	}
+
+	public void setPoTotal(float poTotal) {
+		this.poTotal = poTotal;
+	}
+
 	@Override
 	public String toString() {
 		return "GetPoHeader [poHeaderId=" + poHeaderId + ", poId=" + poId + ", poDate=" + poDate + ", poDatetime="
 				+ poDatetime + ", poRemarks=" + poRemarks + ", userId=" + userId + ", userName=" + userName
-				+ ", cratesRecievedQty=" + cratesRecievedQty + ", poDetailList=" + poDetailList + "]";
+				+ ", cratesRecievedQty=" + cratesRecievedQty + ", poTotal=" + poTotal + ", poDetailList=" + poDetailList
+				+ "]";
 	}
 
 	

@@ -75,6 +75,23 @@ public class PoController {
 		return poHeaderList;
 
 	}
+	@RequestMapping(value = "/getPoHeaderDetailsBetweenDate", method = RequestMethod.POST)
+	public @ResponseBody List<GetPoHeader> getPoHeaderDetailsBetweenDate(@RequestParam("fromDate") String fromDate, 
+			@RequestParam("toDate") String toDate) {
+		
+		List<GetPoHeader> poHeaderList = new ArrayList<>();
+		try {
+			poHeaderList= getPoHeaderRepository.getPoHeaderDetailsBetweenDate(fromDate,toDate);
+		 
+		}
+		catch (Exception e) {
+		 
+			e.printStackTrace();
+
+		}
+		return poHeaderList;
+
+	}
 	//--------------------------------------------------------------------------
 	// ----------------------------------------------------------------------
 		@RequestMapping(value = "/getPoHeaderDetails", method = RequestMethod.POST)

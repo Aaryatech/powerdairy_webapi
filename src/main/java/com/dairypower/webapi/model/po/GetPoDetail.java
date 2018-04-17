@@ -48,7 +48,12 @@ public class GetPoDetail implements Serializable{
 	@Column(name="po_leakage_qty")
 	private int poLeakageQty;
 
+	@Column(name="rate")
+	private float rate;
 	
+	@Column(name="is_used")
+	private int isUsed;
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public Date getMfgDate() {
 		return mfgDate;
 	}
@@ -137,11 +142,28 @@ public class GetPoDetail implements Serializable{
 		this.poLeakageQty = poLeakageQty;
 	}
 
+	public float getRate() {
+		return rate;
+	}
+
+	public void setRate(float rate) {
+		this.rate = rate;
+	}
+
+	public int getIsUsed() {
+		return isUsed;
+	}
+
+	public void setIsUsed(int isUsed) {
+		this.isUsed = isUsed;
+	}
+
 	@Override
 	public String toString() {
 		return "GetPoDetail [poDetailId=" + poDetailId + ", poHeaderId=" + poHeaderId + ", batchNo=" + batchNo
-				+ ", packingDate=" + packingDate + ", itemId=" + itemId + ", itemName=" + itemName + ", itemQty="
-				+ itemQty + ", shortNo=" + shortNo + ", extraNo=" + extraNo + ", poLeakageQty=" + poLeakageQty + "]";
+				+ ", packingDate=" + packingDate + ", mfgDate=" + mfgDate + ", itemId=" + itemId + ", itemName="
+				+ itemName + ", itemQty=" + itemQty + ", shortNo=" + shortNo + ", extraNo=" + extraNo
+				+ ", poLeakageQty=" + poLeakageQty + ", rate=" + rate + ", isUsed=" + isUsed + "]";
 	}
 	
 	

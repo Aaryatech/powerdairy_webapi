@@ -11,7 +11,7 @@ import com.dairypower.webapi.model.po.GetPoDetail;
 @Repository
 public interface GetPoDetailRepository extends JpaRepository<GetPoDetail, Integer>{
 
-	@Query(value="select t_po_details.po_detail_id,t.mfg_date,t_po_details.po_header_id,t_po_details.batch_no,t_po_details.packing_date,t_po_details.item_id,m_item.item_name,t_po_details.item_qty,t_po_details.short_no,t_po_details.extra_no,t_po_details.po_leakage_qty from t_po_details,m_item where m_item.item_id=t_po_details.item_id and t_po_details.po_header_id=:poHeaderId",nativeQuery=true)
+	@Query(value="select t_po_details.po_detail_id,t_po_details.mfg_date,t_po_details.po_header_id,t_po_details.batch_no,t_po_details.packing_date,t_po_details.item_id,m_item.item_name,t_po_details.item_qty,t_po_details.short_no,t_po_details.extra_no,t_po_details.po_leakage_qty,t_po_details.is_used,t_po_details.rate from t_po_details,m_item where m_item.item_id=t_po_details.item_id and t_po_details.po_header_id=:poHeaderId",nativeQuery=true)
 	List<GetPoDetail> findAllByHeaderId(@Param("poHeaderId")int poHeaderId);
 
 }
