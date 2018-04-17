@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dairypower.webapi.model.master.BillPayment;
 import com.dairypower.webapi.model.master.Currency;
 import com.dairypower.webapi.model.master.Customer;
 import com.dairypower.webapi.model.master.CustomerType;
@@ -28,6 +29,7 @@ import com.dairypower.webapi.model.master.Uom;
 import com.dairypower.webapi.model.master.User;
 import com.dairypower.webapi.model.master.UserType;
 import com.dairypower.webapi.model.master.Vehicle;
+import com.dairypower.webapi.repository.BillPaymentRepository;
 import com.dairypower.webapi.repository.CurrencyRepository;
 import com.dairypower.webapi.repository.CustomerRepository;
 import com.dairypower.webapi.repository.CustomerTypeRepository;
@@ -69,34 +71,37 @@ public class MasterController {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	GetUserRepository getUserRepository;
 
 	@Autowired
 	VehicleRepository vehicleRepository;
-	
+
 	@Autowired
 	CustomerTypeRepository custTypeRepository;
 
 	@Autowired
 	UserTypeRepository userTypeRepository;
-	
+
 	@Autowired
 	RsHeaderRepository rsHeaderRepository;
-	
+
 	@Autowired
 	RsDetailRepository rsDetailRepository;
-	
+
 	@Autowired
 	TVehicleRepository tVehicleRepository;
-	
+
 	@Autowired
 	MfgReturnRepository mfgReturnRepository;
-	
+
 	@Autowired
 	CurrencyRepository currencyRepository;
-	
+
+	@Autowired
+	BillPaymentRepository billPaymentRepository;
+
 	// ----------------------------Save Item---------------------------
 	@RequestMapping(value = { "/saveItem" }, method = RequestMethod.POST)
 	public @ResponseBody Info saveItemSup(@RequestBody Item item) {
@@ -272,31 +277,30 @@ public class MasterController {
 
 	// --------------------------------------------------------------------------------------
 	// ----------------------------Save Rate Structure---------------------------
-		@RequestMapping(value = { "/saveRs" }, method = RequestMethod.POST)
-		public @ResponseBody RSHeader saveRs(@RequestBody RSHeader rsHeader) {
+	@RequestMapping(value = { "/saveRs" }, method = RequestMethod.POST)
+	public @ResponseBody RSHeader saveRs(@RequestBody RSHeader rsHeader) {
 
-			RSHeader rsHeadeRes = null;
-			List<RsDetail> rsDetailList=new ArrayList<RsDetail>();
-			try {
-				rsHeadeRes = rsHeaderRepository.saveAndFlush(rsHeader);
-                for(RsDetail rsDetail:rsHeader.getRsDetailList())
-                {
-                	rsDetail.setRsHeaderId(rsHeadeRes.getRsHeaderId());
-                	RsDetail rsDetailRes=rsDetailRepository.saveAndFlush(rsDetail);
-                	rsDetailList.add(rsDetailRes);
-                }
-                rsHeadeRes.setRsDetailList(rsDetailList);
-				
-			} catch (Exception e) {
-
-				e.printStackTrace();
-
+		RSHeader rsHeadeRes = null;
+		List<RsDetail> rsDetailList = new ArrayList<RsDetail>();
+		try {
+			rsHeadeRes = rsHeaderRepository.saveAndFlush(rsHeader);
+			for (RsDetail rsDetail : rsHeader.getRsDetailList()) {
+				rsDetail.setRsHeaderId(rsHeadeRes.getRsHeaderId());
+				RsDetail rsDetailRes = rsDetailRepository.saveAndFlush(rsDetail);
+				rsDetailList.add(rsDetailRes);
 			}
-			return rsHeadeRes;
+			rsHeadeRes.setRsDetailList(rsDetailList);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
 
 		}
+		return rsHeadeRes;
 
-		// --------------------------------------------------------------------------------------
+	}
+
+	// --------------------------------------------------------------------------------------
 	// ------------------------DeleteItem------------------------------------
 	@RequestMapping(value = { "/deleteItem" }, method = RequestMethod.POST)
 	public @ResponseBody Info deleteItem(@RequestParam int itemId) {
@@ -586,75 +590,160 @@ public class MasterController {
 
 	// -------------------------------------------------------------------------
 	// ----------------------------Save TVehicle---------------------------
-		@RequestMapping(value = { "/saveTVehicle" }, method = RequestMethod.POST)
-		public @ResponseBody Info saveTVehicle(@RequestBody TVehicle tVehicle) {
+	@RequestMapping(value = { "/saveTVehicle" }, method = RequestMethod.POST)
+	public @ResponseBody Info saveTVehicle(@RequestBody TVehicle tVehicle) {
 
-			TVehicle tVehicleRes = null;
-			Info info = new Info();
-			try {
-				tVehicleRes = tVehicleRepository.saveAndFlush(tVehicle);
+		TVehicle tVehicleRes = null;
+		Info info = new Info();
+		try {
+			tVehicleRes = tVehicleRepository.saveAndFlush(tVehicle);
 
-				if (tVehicleRes != null) {
-					info.setError(false);
-					info.setMessage("TVehicle Saved Successfully.");
-				} else {
-					info.setError(true);
-					info.setMessage("TVehicle Not Saved .");
-				}
-
-			} catch (Exception e) {
-
+			if (tVehicleRes != null) {
+				info.setError(false);
+				info.setMessage("TVehicle Saved Successfully.");
+			} else {
 				info.setError(true);
 				info.setMessage("TVehicle Not Saved .");
-				e.printStackTrace();
-
 			}
-			return info;
+
+		} catch (Exception e) {
+
+			info.setError(true);
+			info.setMessage("TVehicle Not Saved .");
+			e.printStackTrace();
 
 		}
+		return info;
 
-		// --------------------------------------------------------------------------------------
-		// ----------------------------Save MfgReturn---------------------------
-				@RequestMapping(value = { "/saveMfgReturn" }, method = RequestMethod.POST)
-				public @ResponseBody Info saveMfgReturn(@RequestBody MfgReturn mfgReturn) {
+	}
 
-					MfgReturn mfgReturnRes = null;
-					Info info = new Info();
-					try {
-						mfgReturnRes = mfgReturnRepository.saveAndFlush(mfgReturn);
+	// --------------------------------------------------------------------------------------
+	// ----------------------------Save MfgReturn---------------------------
+	@RequestMapping(value = { "/saveMfgReturn" }, method = RequestMethod.POST)
+	public @ResponseBody Info saveMfgReturn(@RequestBody MfgReturn mfgReturn) {
 
-						if (mfgReturnRes != null) {
-							info.setError(false);
-							info.setMessage("MfgReturn Saved Successfully.");
-						} else {
-							info.setError(true);
-							info.setMessage("MfgReturn Not Saved .");
-						}
+		MfgReturn mfgReturnRes = null;
+		Info info = new Info();
+		try {
+			mfgReturnRes = mfgReturnRepository.saveAndFlush(mfgReturn);
 
-					} catch (Exception e) {
+			if (mfgReturnRes != null) {
+				info.setError(false);
+				info.setMessage("MfgReturn Saved Successfully.");
+			} else {
+				info.setError(true);
+				info.setMessage("MfgReturn Not Saved .");
+			}
 
-						info.setError(true);
-						info.setMessage("MfgReturn Not Saved .");
-						e.printStackTrace();
+		} catch (Exception e) {
 
-					}
-					return info;
+			info.setError(true);
+			info.setMessage("MfgReturn Not Saved .");
+			e.printStackTrace();
 
-				}
+		}
+		return info;
 
-				// --------------------------------------------------------------------------------------
-				@RequestMapping(value = "/getAllRsHeader", method = RequestMethod.GET)
-				public @ResponseBody List<RSHeader> getAllRsHeader() {
+	}
 
-					List<RSHeader> rsHeaderList;
-					try {
-						rsHeaderList = rsHeaderRepository.findAllByIsUsed(0);
-					} catch (Exception e) {
-						rsHeaderList = new ArrayList<>();
-						 
-						e.printStackTrace();
+	// --------------------------------------------------------------------------------------
+	@RequestMapping(value = "/getAllRsHeader", method = RequestMethod.GET)
+	public @ResponseBody List<RSHeader> getAllRsHeader() {
 
-					} 
-					return rsHeaderList;
-				}
+		List<RSHeader> rsHeaderList;
+		try {
+			rsHeaderList = rsHeaderRepository.findAllByIsUsed(0);
+		} catch (Exception e) {
+			rsHeaderList = new ArrayList<>();
+
+			e.printStackTrace();
+
+		}
+		return rsHeaderList;
+	}
+
+	// --------------------------------------------------------------------------------------
+	// ----------------------------Insert Currency----------------------------
+	@RequestMapping(value = { "/insertCurrency" }, method = RequestMethod.POST)
+	public @ResponseBody Info insertCurrency(@RequestBody Currency currency) {
+
+		Currency currencyRes = null;
+		Info info = new Info();
+		try {
+			currencyRes = currencyRepository.saveAndFlush(currency);
+
+			if (currencyRes != null) {
+				info.setError(false);
+				info.setMessage("Currency Insert Successfully.");
+			} else {
+				info.setError(true);
+				info.setMessage("Currency not Insert.");
+			}
+
+		} catch (Exception e) {
+
+			info.setError(true);
+			info.setMessage("Currency not Insert.");
+			e.printStackTrace();
+
+		}
+		return info;
+
+	}
+
+	// ---------------------------All Currency---------------------------------
+	@RequestMapping(value = "/getAllCurrency", method = RequestMethod.GET)
+	public @ResponseBody List<Currency> getAllCurrency() {
+
+		List<Currency> currencyList;
+		try {
+			currencyList = currencyRepository.findAllByIsUsed(1);
+		} catch (Exception e) {
+			currencyList = new ArrayList<>();
+
+			e.printStackTrace();
+
+		}
+		return currencyList;
+	}
+
+	// --------------------------------------------------------------------------------------
+	// ----------------------------Insert Bill Payment---------------------
+	@RequestMapping(value = { "/insertBillPayment" }, method = RequestMethod.POST)
+	public @ResponseBody Info insertBillPayment(@RequestBody BillPayment billPayment) {
+
+		BillPayment billPaymentRes = null;
+		Info info = new Info();
+		try {
+			billPaymentRes = billPaymentRepository.saveAndFlush(billPayment);
+
+			if (billPaymentRes != null) {
+				info.setError(false);
+				info.setMessage(" Bill Done Successfully.");
+			} else {
+				info.setError(true);
+				info.setMessage("not done.");
+			}
+
+		} catch (Exception e) {
+
+			info.setError(true);
+			info.setMessage("not done.");
+			e.printStackTrace();
+
+		}
+		return info;
+
+	}
+
+	// -------------------------------------------------------------------------
+	// ------------------------Getting Bill by Id-----------------------
+	@RequestMapping(value = { "/getAllBillPayemntById" }, method = RequestMethod.POST)
+	public @ResponseBody BillPayment getAllBillPayemntById(@RequestParam("billId") int billId) {
+
+		BillPayment billPayment = billPaymentRepository.findBillPaymentByBillId(billId);
+
+		return billPayment;
+	}
+
 }
