@@ -23,6 +23,10 @@ public class Currency implements Serializable{
 	
 	@Column(name="currency_value")
 	private float currencyValue;
+	
+	private int isUsed;
+	
+	
 
 	public int getCurrId() {
 		return currId;
@@ -48,9 +52,22 @@ public class Currency implements Serializable{
 		this.currencyValue = currencyValue;
 	}
 
+	
+	
+	public int getIsUsed() {
+		return isUsed;
+	}
+
+	public void setIsUsed(int isUsed) {
+		this.isUsed = isUsed;
+	}
+
 	@Override
 	public String toString() {
-		return "Currency [currId=" + currId + ", description=" + description + ", currencyValue=" + currencyValue + "]";
+		return "Currency [currId=" + currId + ", description=" + description + ", currencyValue=" + currencyValue
+				+ ", isUsed=" + isUsed + "]";
 	}
+
+	
 	
 }
