@@ -24,6 +24,9 @@ public class StockHeader implements Serializable{
 	
 	@Column(name="date")
 	private Date date;
+	
+	@Column(name="status")
+	private int status;
 
 	@Transient
     List<StockDetail> stockDetailList;
@@ -53,9 +56,18 @@ public class StockHeader implements Serializable{
 		this.date = date;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "StockHeader [stockHeaderId=" + stockHeaderId + ", date=" + date + "]";
+		return "StockHeader [stockHeaderId=" + stockHeaderId + ", date=" + date + ", status=" + status
+				+ ", stockDetailList=" + stockDetailList + "]";
 	}
 	
 	

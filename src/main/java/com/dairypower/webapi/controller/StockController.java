@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dairypower.webapi.model.stock.GetCurrentStock;
+import com.dairypower.webapi.model.stock.ItemStockDetail;
 import com.dairypower.webapi.model.stock.StockDetail;
 import com.dairypower.webapi.model.stock.StockHeader;
+import com.dairypower.webapi.repository.GetCurrentStockRepository;
+import com.dairypower.webapi.repository.ItemStockDetailRepository;
 import com.dairypower.webapi.repository.StockDetailRepository;
-import com.dairypower.webapi.repository.StockHeaderRepository;
+import com.dairypower.webapi.repository.StockHeaderRepository; 
 
 @RestController
 public class StockController {
@@ -23,6 +28,12 @@ public class StockController {
 	
 	@Autowired
 	StockDetailRepository stockDetailRepository;
+	
+	@Autowired
+	ItemStockDetailRepository itemStockDetailRepository;
+	
+	@Autowired
+	GetCurrentStockRepository getCurrentStockRepository;
 	
 	// ----------------------------Save Stock ---------------------------
 	@RequestMapping(value = { "/saveStock" }, method = RequestMethod.POST)
@@ -46,6 +57,85 @@ public class StockController {
 
 		}
 		return stockHeaderRes;
+
+	}
+	
+	@RequestMapping(value = { "/getStock" }, method = RequestMethod.GET)
+	public @ResponseBody StockHeader getStock()
+	{
+		 
+		StockHeader getStock = new StockHeader();
+		try {
+			  int status = 0;
+			getStock = stockHeaderRepository.findByStatus(status);
+			
+			if(getStock==null)
+			{
+				 getStock = new StockHeader();
+			}
+			 
+			 
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+         
+		return getStock;
+
+	}
+	
+	@RequestMapping(value = { "/getStockDetail" }, method = RequestMethod.POST)
+	public @ResponseBody List<ItemStockDetail> getStockDetail(@RequestParam ("stockId") int stockId)
+	{
+		 
+		List<ItemStockDetail> stockDetail = new ArrayList<ItemStockDetail>();
+		try {
+			 
+				 stockDetail = itemStockDetailRepository.getDetailed(stockId); 
+			 
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+         
+		return stockDetail;
+
+	}
+	
+	@RequestMapping(value = { "/getCurrentStock" }, method = RequestMethod.POST)
+	public @ResponseBody List<GetCurrentStock> getCurrentStock(@RequestParam ("date") String date)
+	{
+		 
+		List<GetCurrentStock> getCurrentStock = new ArrayList<GetCurrentStock>();
+		try {
+			 
+			getCurrentStock = getCurrentStockRepository.getCurrentStock(date); 
+			 
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+         
+		return getCurrentStock;
+
+	}
+	
+	@RequestMapping(value = { "/getStockDetailForUpdate" }, method = RequestMethod.POST)
+	public @ResponseBody List<StockDetail> getStockDetailForUpdate(@RequestParam ("stockId") int stockId)
+	{
+		 
+		List<StockDetail> getStockDetailForUpdate = new ArrayList<StockDetail>();
+		try {
+			 
+			getStockDetailForUpdate = stockDetailRepository.findByStockHeaderId(stockId);  
+			
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+         
+		return getStockDetailForUpdate;
 
 	}
 

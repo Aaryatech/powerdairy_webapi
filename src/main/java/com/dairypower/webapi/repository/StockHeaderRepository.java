@@ -7,4 +7,6 @@ import com.dairypower.webapi.model.stock.StockHeader;
 @Repository
 public interface StockHeaderRepository extends JpaRepository<StockHeader, Integer>{
 
+	StockHeader findByStatus(int status);
+
 }

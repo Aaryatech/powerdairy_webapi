@@ -23,7 +23,7 @@ public class StockDetail implements Serializable{
 	@Column(name="item_id")
 	private int itemId;
 	
-	@Column(name="closing_qty")
+	@Column(name="closing_stock")
 	private int closingQty;
 
 	public int getStockDetailId() {
