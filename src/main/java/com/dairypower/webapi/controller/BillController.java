@@ -23,6 +23,7 @@ import com.dairypower.webapi.repository.BillDetailRepository;
 import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.GetBillDetailRepository;
 import com.dairypower.webapi.repository.GetBillHeaderRepository;
+import com.dairypower.webapi.repository.RsDetailRepository;
 
 @RestController
 public class BillController {
@@ -38,6 +39,9 @@ public class BillController {
 	
 	@Autowired
 	GetBillDetailRepository getBillDetailRepository;
+	
+	@Autowired
+	RsDetailRepository rsDetailRepository;
 	
 	// ----------------------------Save Bill---------------------------
 			@RequestMapping(value = { "/saveBill" }, method = RequestMethod.POST)
@@ -103,4 +107,19 @@ public class BillController {
 
 			}
 			//--------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------
+			@RequestMapping(value = "/getRsData", method = RequestMethod.POST)
+			public @ResponseBody RsDetail getRsData(@RequestParam("itemId") int itemId,@RequestParam("custId") int custId)  {
+
+				RsDetail rsDetail=new RsDetail();
+				try {
+					rsDetail = rsDetailRepository.findByCustIdAndItemId(custId,itemId);
+				} catch (Exception e) {
+					e.printStackTrace();
+
+				}
+				return rsDetail;
+			}
+
+			// --------------------------------------------------------------------------------------
 }

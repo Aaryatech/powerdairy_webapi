@@ -84,7 +84,7 @@ public class Customer implements Serializable{
 	@Column(name="is_used")
 	private int isUsed;
 	
-	@Column(name="outstannding_amt")
+	@Column(name="outstanding_amt")
 	private float outstandingAmt;
 	
 	public float getOutstandingAmt() {

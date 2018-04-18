@@ -19,7 +19,7 @@ public class RSHeader implements Serializable{
 	@Column(name = "rs_header_id")
 	private int rsHeaderId; 
 	
-	@Column(name = "rsName")
+	@Column(name = "rs_name")
 	private String rsName; 
 	
 	@Column(name = "is_used")

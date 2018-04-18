@@ -50,8 +50,8 @@ public class BillHeader implements Serializable{
 	@Column(name="crates_issued")
 	private int cratesIssued;
 	
-	@Column(name="crates_recieved")
-	private int cratesRecieved;
+	@Column(name="crates_received")
+	private int cratesReceived;
 	
 	@Column(name="crates_cl_bal")
 	private int cratesClBal;
@@ -157,12 +157,12 @@ public class BillHeader implements Serializable{
 		this.cratesIssued = cratesIssued;
 	}
 
-	public int getCratesRecieved() {
-		return cratesRecieved;
+	public int getCratesReceived() {
+		return cratesReceived;
 	}
 
-	public void setCratesRecieved(int cratesRecieved) {
-		this.cratesRecieved = cratesRecieved;
+	public void setCratesReceived(int cratesReceived) {
+		this.cratesReceived = cratesReceived;
 	}
 
 	public int getCratesClBal() {
@@ -194,7 +194,7 @@ public class BillHeader implements Serializable{
 		return "BillHeader [billTempId=" + billTempId + ", billId=" + billId + ", billDate=" + billDate + ", custId="
 				+ custId + ", vehId=" + vehId + ", collectedAmt=" + collectedAmt + ", outstandingAmt=" + outstandingAmt
 				+ ", collectionPaymode=" + collectionPaymode + ", cratesOpBal=" + cratesOpBal + ", cratesIssued="
-				+ cratesIssued + ", cratesRecieved=" + cratesRecieved + ", cratesClBal=" + cratesClBal + ", remarks="
+				+ cratesIssued + ", cratesReceived=" + cratesReceived + ", cratesClBal=" + cratesClBal + ", remarks="
 				+ remarks + ", isSettled=" + isSettled + "]";
 	}
 
