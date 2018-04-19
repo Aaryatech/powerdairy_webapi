@@ -15,12 +15,12 @@ public interface ItemStockDetailRepository extends JpaRepository<ItemStockDetail
 			"        0)as stock_detail_id,\r\n" + 
 			"        coalesce(t.stock_header_id,\r\n" + 
 			"        0)as stock_header_id,\r\n" + 
-			"        coalesce(t.closing_stock,\r\n" + 
+			"        coalesce(t.op_stock,\r\n" + 
 			"        0)as closing_stock  \r\n" + 
 			"    FROM\r\n" + 
 			"        m_item        \r\n" + 
 			"    LEFT JOIN\r\n" + 
-			"        ( select t.closing_stock,\r\n" + 
+			"        ( select t.op_stock,\r\n" + 
 			"                t.stock_detail_id,\r\n" + 
 			"                t.stock_header_id,\r\n" + 
 			"                t.item_id\r\n" + 

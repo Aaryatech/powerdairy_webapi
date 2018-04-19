@@ -120,6 +120,25 @@ public class StockController {
 
 	}
 	
+	@RequestMapping(value = { "/getStockBetweenDate" }, method = RequestMethod.POST)
+	public @ResponseBody List<GetCurrentStock> getStockBetweenDate(@RequestParam ("fromDate") String fromDate,
+			@RequestParam ("toDate") String toDate )
+	{
+		 
+		List<GetCurrentStock> getStockBetweenDate = new ArrayList<GetCurrentStock>();
+		try {
+			 
+			getStockBetweenDate = getCurrentStockRepository.getStockBetweenDate(fromDate,toDate); 
+			 
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+         
+		return getStockBetweenDate;
+
+	}
+	
 	@RequestMapping(value = { "/getStockDetailForUpdate" }, method = RequestMethod.POST)
 	public @ResponseBody List<StockDetail> getStockDetailForUpdate(@RequestParam ("stockId") int stockId)
 	{

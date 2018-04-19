@@ -25,6 +25,10 @@ public class StockDetail implements Serializable{
 	
 	@Column(name="closing_stock")
 	private int closingQty;
+	
+	@Column(name="op_stock")
+	private int opStock;
+	
 
 	public int getStockDetailId() {
 		return stockDetailId;
@@ -58,10 +62,18 @@ public class StockDetail implements Serializable{
 		this.closingQty = closingQty;
 	}
 
+	public int getOpStock() {
+		return opStock;
+	}
+
+	public void setOpStock(int opStock) {
+		this.opStock = opStock;
+	}
+
 	@Override
 	public String toString() {
 		return "StockDetail [stockDetailId=" + stockDetailId + ", stockHeaderId=" + stockHeaderId + ", itemId=" + itemId
-				+ ", closingQty=" + closingQty + "]";
+				+ ", closingQty=" + closingQty + ", opStock=" + opStock + "]";
 	}
 	
 	
