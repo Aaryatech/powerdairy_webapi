@@ -113,5 +113,43 @@ public class PoController {
 			return poHeader;
 
 		}
+		
+		@RequestMapping(value = "/getBatchListByitemId", method = RequestMethod.POST)
+		public @ResponseBody List<PoDetail> getBatchListByitemId(@RequestParam("itemId") int itemId) {
+
+			List<PoDetail> poDetailList  = new ArrayList<PoDetail>();
+			try {
+				 
+				  poDetailList=poDetailRepository.getBatchListByitemId(itemId);
+				
+				 
+			}
+			catch (Exception e) {
+				 
+				e.printStackTrace();
+
+			}
+			return poDetailList;
+
+		}
+		
+		@RequestMapping(value = "/updatePoDetail", method = RequestMethod.POST)
+		public @ResponseBody PoDetail updatePoDetail( @RequestBody PoDetail poDetail) {
+
+			PoDetail poDetailRet  = new PoDetail();
+			try {
+				 
+				poDetailRet=poDetailRepository.save(poDetail);
+				
+				 
+			}
+			catch (Exception e) {
+				 
+				e.printStackTrace();
+
+			}
+			return poDetailRet;
+
+		}
 		//--------------------------------------------------------------------------
 }

@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
+@Table(name = "t_mfg_return")
 public class MfgReturn implements Serializable{
 	
 	@Id
@@ -25,12 +27,12 @@ public class MfgReturn implements Serializable{
 	private String datetime;
 	
 	@Column(name="batch_id")
-	private int batchId;
+	private String batchId;
 	
 	@Column(name="item_id")
 	private int itemId;
 	
-	@Column(name="return_qty")
+	@Column(name="item_return_qty")
 	private int returnQty;
 	
 	@Column(name="entry_by")
@@ -38,6 +40,9 @@ public class MfgReturn implements Serializable{
 	
 	@Column(name="remark")
 	private String remark;
+	
+	@Column(name="crates_return_qty")
+	private int cratesReturnQty;
 
 	public int gettReturnId() {
 		return tReturnId;
@@ -51,7 +56,7 @@ public class MfgReturn implements Serializable{
 		return datetime;
 	}
 
-	public int getBatchId() {
+	public String getBatchId() {
 		return batchId;
 	}
 
@@ -83,7 +88,7 @@ public class MfgReturn implements Serializable{
 		this.datetime = datetime;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(String batchId) {
 		this.batchId = batchId;
 	}
 
@@ -103,11 +108,17 @@ public class MfgReturn implements Serializable{
 		this.remark = remark;
 	}
 
+	public int getCratesReturnQty() {
+		return cratesReturnQty;
+	}
+	public void setCratesReturnQty(int cratesReturnQty) {
+		this.cratesReturnQty = cratesReturnQty;
+	}
 	@Override
 	public String toString() {
 		return "MfgReturn [tReturnId=" + tReturnId + ", date=" + date + ", datetime=" + datetime + ", batchId="
 				+ batchId + ", itemId=" + itemId + ", returnQty=" + returnQty + ", entryBy=" + entryBy + ", remark="
-				+ remark + "]";
+				+ remark + ", cratesReturnQty=" + cratesReturnQty + "]";
 	}
 	
 }

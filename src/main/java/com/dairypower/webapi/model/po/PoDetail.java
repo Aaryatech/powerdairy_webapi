@@ -52,6 +52,9 @@ public class PoDetail implements Serializable{
 
 	@Column(name="is_used")
 	private int isUsed;
+	
+	@Column(name="balance")
+	private int balance;
 
 	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public Date getMfgDate() {
@@ -150,12 +153,20 @@ public class PoDetail implements Serializable{
 		this.isUsed = isUsed;
 	}
 
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
 	@Override
 	public String toString() {
 		return "PoDetail [poDetailId=" + poDetailId + ", poHeaderId=" + poHeaderId + ", batchNo=" + batchNo
 				+ ", packingDate=" + packingDate + ", mfgDate=" + mfgDate + ", itemId=" + itemId + ", itemQty="
 				+ itemQty + ", shortNo=" + shortNo + ", extraNo=" + extraNo + ", poLeakageQty=" + poLeakageQty
-				+ ", rate=" + rate + ", isUsed=" + isUsed + "]";
+				+ ", rate=" + rate + ", isUsed=" + isUsed + ", balance=" + balance + "]";
 	}
     
 	
