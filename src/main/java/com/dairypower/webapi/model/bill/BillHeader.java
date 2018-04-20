@@ -62,6 +62,10 @@ public class BillHeader implements Serializable{
 	@Column(name="is_settled")
 	private int isSettled;
 	
+	@Column(name="grand_total")
+	private float grandTotal;
+	
+	
 	@Transient
 	List<BillDetail> billDetailList;
 	
@@ -73,6 +77,14 @@ public class BillHeader implements Serializable{
 
 	public void setBillDetailList(List<BillDetail> billDetailList) {
 		this.billDetailList = billDetailList;
+	}
+    
+	public float getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setGrandTotal(float grandTotal) {
+		this.grandTotal = grandTotal;
 	}
 
 	public int getBillTempId() {
@@ -94,7 +106,7 @@ public class BillHeader implements Serializable{
 	public Date getBillDate() {
 		return billDate;
 	}
-
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public void setBillDate(Date billDate) {
 		this.billDate = billDate;
 	}

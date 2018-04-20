@@ -23,7 +23,7 @@ public class BillPayment implements Serializable {
 	private int billId;
 	
 	@Column(name="tran_id")
-	private int tranId;
+	private String tranId;
 	
 	
 	@Column(name="curr_id")
@@ -31,7 +31,7 @@ public class BillPayment implements Serializable {
 	
 
 	@Column(name="qty")
-	private String qty;
+	private int qty;
 	
 	@Column(name="total_amt")
 	private float totalAmt;
@@ -52,11 +52,11 @@ public class BillPayment implements Serializable {
 		this.billId = billId;
 	}
 
-	public int getTranId() {
+	public String getTranId() {
 		return tranId;
 	}
 
-	public void setTranId(int tranId) {
+	public void setTranId(String tranId) {
 		this.tranId = tranId;
 	}
 
@@ -68,11 +68,11 @@ public class BillPayment implements Serializable {
 		this.currId = currId;
 	}
 
-	public String getQty() {
+	public int getQty() {
 		return qty;
 	}
 
-	public void setQty(String qty) {
+	public void setQty(int qty) {
 		this.qty = qty;
 	}
 

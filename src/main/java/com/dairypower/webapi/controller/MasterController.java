@@ -1,5 +1,7 @@
 package com.dairypower.webapi.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,6 +303,40 @@ public class MasterController {
 	}
 
 	// --------------------------------------------------------------------------------------
+	// ----------------------------Save Rate Details---------------------------
+		@RequestMapping(value = { "/saveRsDetails" }, method = RequestMethod.POST)
+		public @ResponseBody Info saveRsDetails(@RequestBody List<RsDetail> rsDetails) {
+
+			Info info=null;
+			try {
+				List<RsDetail> rsDetailList=new ArrayList<>();
+				for (RsDetail rsDetail :rsDetails) {
+					RsDetail rsDetailRes = rsDetailRepository.saveAndFlush(rsDetail);
+					rsDetailList.add(rsDetailRes);
+				}
+                if(rsDetailList.isEmpty())
+                {
+                	info=new Info();
+                	info.setError(true);
+                	info.setMessage("RsDetails Not Saved");
+                }
+                else
+                {
+                	info=new Info();
+                	info.setError(false);
+                	info.setMessage("RsDetails Saved Succcessfully");
+                }
+				
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			}
+			return info;
+
+		}
+
+		// --------------------------------------------------------------------------------------
 	// ------------------------DeleteItem------------------------------------
 	@RequestMapping(value = { "/deleteItem" }, method = RequestMethod.POST)
 	public @ResponseBody Info deleteItem(@RequestParam int itemId) {
@@ -347,6 +383,23 @@ public class MasterController {
 		} else {
 			info.setError(true);
 			info.setMessage("Customer Deletion Failed");
+		}
+		return info;
+	}
+
+	// ------------------------------------------------------------------------
+	// ------------------------Delete RsHeader------------------------------------
+	@RequestMapping(value = { "/deleteRsHeader" }, method = RequestMethod.POST)
+	public @ResponseBody Info deleteRsHeader(@RequestParam int rsHeaderId) {
+
+		int isDeleted = rsHeaderRepository.deleteRsHeader(rsHeaderId);
+		Info info = new Info();
+		if (isDeleted == 1) {
+			info.setError(false);
+			info.setMessage("Rate Structure Deleted Successfully");
+		} else {
+			info.setError(true);
+			info.setMessage("Rate Structure Deletion Failed");
 		}
 		return info;
 	}
@@ -663,6 +716,41 @@ public class MasterController {
 	}
 
 	// --------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------
+		@RequestMapping(value = "/getRsHeader", method = RequestMethod.POST)
+		public @ResponseBody RSHeader getRsHeader(@RequestParam("rsHeaderId") int rsHeaderId) {
+
+			RSHeader rsHeaderRes;
+			try {
+				rsHeaderRes = rsHeaderRepository.findByRsHeaderId(rsHeaderId);
+			} catch (Exception e) {
+				rsHeaderRes = new RSHeader();
+
+				e.printStackTrace();
+
+			}
+			return rsHeaderRes;
+		}
+
+		// --------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------
+		@RequestMapping(value = "/getAllRsDetails", method = RequestMethod.POST)
+		public @ResponseBody List<RsDetail> getAllRsDetails(@RequestParam("rsHeaderId") int rsHeaderId) {
+
+			List<RsDetail> rsDetailList;
+			try {
+				rsDetailList = rsDetailRepository.findAllByRsHeaderId(rsHeaderId);
+				
+			} catch (Exception e) {
+				rsDetailList = new ArrayList<>();
+
+				e.printStackTrace();
+
+			}
+			return rsDetailList;
+		}
+
+		// --------------------------------------------------------------------------------------
 	// ----------------------------Insert Currency----------------------------
 	@RequestMapping(value = { "/insertCurrency" }, method = RequestMethod.POST)
 	public @ResponseBody Info insertCurrency(@RequestBody Currency currency) {
@@ -697,7 +785,7 @@ public class MasterController {
 
 		List<Currency> currencyList;
 		try {
-			currencyList = currencyRepository.findAllByIsUsed(1);
+			currencyList = currencyRepository.findAllByIsUsed(0);
 		} catch (Exception e) {
 			currencyList = new ArrayList<>();
 
@@ -710,12 +798,12 @@ public class MasterController {
 	// --------------------------------------------------------------------------------------
 	// ----------------------------Insert Bill Payment---------------------
 	@RequestMapping(value = { "/insertBillPayment" }, method = RequestMethod.POST)
-	public @ResponseBody Info insertBillPayment(@RequestBody BillPayment billPayment) {
+	public @ResponseBody Info insertBillPayment(@RequestBody List<BillPayment> billPaymentList) {
 
-		BillPayment billPaymentRes = null;
+		List<BillPayment> billPaymentRes = null;
 		Info info = new Info();
 		try {
-			billPaymentRes = billPaymentRepository.saveAndFlush(billPayment);
+			billPaymentRes = billPaymentRepository.saveAll(billPaymentList);
 
 			if (billPaymentRes != null) {
 				info.setError(false);

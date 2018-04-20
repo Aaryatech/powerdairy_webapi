@@ -70,12 +70,35 @@ public class BillController {
 
 	// ----------------------------------------------------------------------
 			// ----------------------------------------------------------------------
-			@RequestMapping(value = "/getAllBillHeaders", method = RequestMethod.GET)
+			@RequestMapping(value = "/getAllBillHeaders", method = RequestMethod.POST)
 			public @ResponseBody List<GetBillHeader> getAllBillHeaders(@RequestParam("fromDate") String fromDate,@RequestParam("toDate") String toDate) {
 
 				List<GetBillHeader> getBillHeaderList;
 				try {
 					getBillHeaderList = getBillHeaderRepository.findAllBillHeaders(fromDate,toDate);
+				}
+				catch (Exception e) {
+					getBillHeaderList=new ArrayList<>();
+					e.printStackTrace();
+
+				}
+				return getBillHeaderList;
+
+			}
+			//--------------------------------------------------------------------------
+			@RequestMapping(value = "/getSettledBills", method = RequestMethod.POST)
+			public @ResponseBody List<GetBillHeader> getSettledBills(@RequestParam("date") String date,@RequestParam("isSettled") int isSettled) {
+
+				List<GetBillHeader> 	getBillHeaderList=new ArrayList<>();
+				try {
+				getBillHeaderList = getBillHeaderRepository.getSettledBills(date,isSettled);
+					
+					for(int i=0;i<getBillHeaderList.size();i++)
+					{
+						List<GetBillDetail> billDetailList=getBillDetailRepository.findAllByBillTempId(getBillHeaderList.get(i).getBillTempId());
+						getBillHeaderList.get(i).setGetBillDetailList(billDetailList);
+					}
+					
 				}
 				catch (Exception e) {
 					getBillHeaderList=new ArrayList<>();

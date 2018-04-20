@@ -38,6 +38,7 @@ public class GetBillHeader implements Serializable{
 	@Column(name="veh_name")
 	private String vehName;
 	
+	
 	@Column(name="collected_amt")
 	private float collectedAmt;
 	
@@ -53,8 +54,8 @@ public class GetBillHeader implements Serializable{
 	@Column(name="crates_issued")
 	private int cratesIssued;
 	
-	@Column(name="crates_recieved")
-	private int cratesRecieved;
+	@Column(name="crates_received")
+	private int cratesReceived;
 	
 	@Column(name="crates_cl_bal")
 	private int cratesClBal;
@@ -64,11 +65,23 @@ public class GetBillHeader implements Serializable{
 	
 	@Column(name="is_settled")
 	private int isSettled;
+	
+	@Column(name="grand_total")
+	private float grandTotal;
+
 
 	@Transient
 	List<GetBillDetail> getBillDetailList;
 	
-	
+
+	public float getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setGrandTotal(float grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+
 	public List<GetBillDetail> getGetBillDetailList() {
 		return getBillDetailList;
 	}
@@ -173,12 +186,12 @@ public class GetBillHeader implements Serializable{
 		this.cratesIssued = cratesIssued;
 	}
 
-	public int getCratesRecieved() {
-		return cratesRecieved;
+	public int getCratesReceived() {
+		return cratesReceived;
 	}
 
-	public void setCratesRecieved(int cratesRecieved) {
-		this.cratesRecieved = cratesRecieved;
+	public void setCratesReceived(int cratesReceived) {
+		this.cratesReceived = cratesReceived;
 	}
 
 	public int getCratesClBal() {
@@ -211,7 +224,7 @@ public class GetBillHeader implements Serializable{
 				+ custId + ", custName=" + custName + ", vehId=" + vehId + ", vehName=" + vehName + ", collectedAmt="
 				+ collectedAmt + ", outstandingAmt=" + outstandingAmt + ", collectionPaymode=" + collectionPaymode
 				+ ", cratesOpBal=" + cratesOpBal + ", cratesIssued=" + cratesIssued + ", cratesRecieved="
-				+ cratesRecieved + ", cratesClBal=" + cratesClBal + ", remarks=" + remarks + ", isSettled=" + isSettled
+				+ cratesReceived + ", cratesClBal=" + cratesClBal + ", remarks=" + remarks + ", isSettled=" + isSettled
 				+ "]";
 	}
 	

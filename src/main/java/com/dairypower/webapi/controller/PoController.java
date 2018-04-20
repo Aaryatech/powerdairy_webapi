@@ -152,4 +152,39 @@ public class PoController {
 
 		}
 		//--------------------------------------------------------------------------
+		// ----------------------------------------------------------------------
+		@RequestMapping(value = "/getPoDetails", method = RequestMethod.POST)
+		public @ResponseBody List<GetPoDetail> getPoDetails(@RequestParam("itemId") int itemId) {
+
+			List<GetPoDetail> poDetailList=null;
+			try {
+				 poDetailList=getPoDetailRepository.findBatchesById(itemId);
+
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+
+			}
+			return poDetailList;
+
+		}
+		//--------------------------------------------------------------------------
+		// ----------------------------------------------------------------------
+		@RequestMapping(value = "/getPoDetailsList", method = RequestMethod.GET)
+		public @ResponseBody List<GetPoDetail> getPoDetailsList() {
+
+			List<GetPoDetail> poDetailList=null;
+			try {
+				 poDetailList=getPoDetailRepository.findAllAvailableBatches();
+
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+
+			}
+			return poDetailList;
+
+		}
+		//--------------------------------------------------------------------------
+
 }

@@ -12,12 +12,16 @@ import com.dairypower.webapi.model.bill.GetBillHeader;
 public interface GetBillHeaderRepository extends JpaRepository<GetBillHeader, Integer>{
 
 	@Query(value="select t.bill_temp_id,t.bill_id,t.bill_date,t.cust_id,c.cust_name,t.veh_id,v.veh_name,t.collected_amt,t.outstanding_amt,t.collection_paymode,\n" + 
-			"  t.crates_op_bal,t.crates_issued,t.crates_received,t.crates_cl_bal,t.remarks,t.is_settled from t_bill_header t,m_customer c,m_vehicle v where t.cust_id=c.cust_id and t.veh_id=v.veh_id and t.bill_date between :fromDate and :toDate",nativeQuery=true)
+			"  t.crates_op_bal,t.crates_issued,t.crates_received,t.crates_cl_bal,t.remarks,t.is_settled,t.grand_total from t_bill_header t,m_customer c,m_vehicle v where t.cust_id=c.cust_id and t.veh_id=v.veh_id and t.bill_date between :fromDate and :toDate",nativeQuery=true)
 	List<GetBillHeader> findAllBillHeaders(@Param("fromDate")String fromDate,@Param("toDate") String toDate);
 	
 	@Query(value="select t.bill_temp_id,t.bill_id,t.bill_date,t.cust_id,c.cust_name,t.veh_id,v.veh_name,t.collected_amt,t.outstanding_amt,t.collection_paymode,\n" + 
-			"  t.crates_op_bal,t.crates_issued,t.crates_received,t.crates_cl_bal,t.remarks,t.is_settled from t_bill_header t,m_customer c,m_vehicle v where t.cust_id=c.cust_id and t.veh_id=v.veh_id and t.bill_temp_id=:billTempId",nativeQuery=true)
+			"  t.crates_op_bal,t.crates_issued,t.crates_received,t.crates_cl_bal,t.remarks,t.is_settled,t.grand_total from t_bill_header t,m_customer c,m_vehicle v where t.cust_id=c.cust_id and t.veh_id=v.veh_id and t.bill_temp_id=:billTempId",nativeQuery=true)
 	GetBillHeader findBillHeadersAndDetails(@Param("billTempId")int billTempId);
+
+	@Query(value="select t.bill_temp_id,t.bill_id,t.bill_date,t.cust_id,c.cust_name,t.veh_id,v.veh_name,t.collected_amt,t.outstanding_amt,t.collection_paymode, t.crates_op_bal,t.crates_issued,t.crates_received,t.crates_cl_bal,t.remarks,t.is_settled,t.grand_total from t_bill_header t,m_customer c,m_vehicle v where t.cust_id=c.cust_id and t.veh_id=v.veh_id and t.bill_date=:date and t.is_settled=:isSettled",nativeQuery=true)
+	List<GetBillHeader> getSettledBills(@Param("date")String date,@Param("isSettled")int isSettled);
+
 
 
 }

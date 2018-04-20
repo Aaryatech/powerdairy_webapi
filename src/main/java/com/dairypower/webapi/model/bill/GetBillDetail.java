@@ -1,6 +1,7 @@
 package com.dairypower.webapi.model.bill;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,6 +48,7 @@ public class GetBillDetail implements Serializable{
 	
 	@Column(name="igst_per")
 	private float igstPer;
+
 
 	public int getBillDetailId() {
 		return billDetailId;
