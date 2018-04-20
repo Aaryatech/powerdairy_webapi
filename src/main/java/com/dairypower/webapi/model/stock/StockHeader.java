@@ -27,6 +27,12 @@ public class StockHeader implements Serializable{
 	
 	@Column(name="status")
 	private int status;
+	
+	@Column(name="crates_op_qty")
+	private int cratesOpQty;
+	
+	@Column(name="crates_close_qty")
+	private int cratesCloseQty;
 
 	@Transient
     List<StockDetail> stockDetailList;
@@ -64,11 +70,29 @@ public class StockHeader implements Serializable{
 		this.status = status;
 	}
 
+	public int getCratesOpQty() {
+		return cratesOpQty;
+	}
+
+	public void setCratesOpQty(int cratesOpQty) {
+		this.cratesOpQty = cratesOpQty;
+	}
+
+	public int getCratesCloseQty() {
+		return cratesCloseQty;
+	}
+
+	public void setCratesCloseQty(int cratesCloseQty) {
+		this.cratesCloseQty = cratesCloseQty;
+	}
+
 	@Override
 	public String toString() {
 		return "StockHeader [stockHeaderId=" + stockHeaderId + ", date=" + date + ", status=" + status
-				+ ", stockDetailList=" + stockDetailList + "]";
+				+ ", cratesOpQty=" + cratesOpQty + ", cratesCloseQty=" + cratesCloseQty + ", stockDetailList="
+				+ stockDetailList + "]";
 	}
-	
+
+	 
 	
 }

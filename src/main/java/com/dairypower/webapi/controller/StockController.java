@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dairypower.webapi.model.stock.GetCratesStock;
 import com.dairypower.webapi.model.stock.GetCurrentStock;
 import com.dairypower.webapi.model.stock.ItemStockDetail;
 import com.dairypower.webapi.model.stock.StockDetail;
 import com.dairypower.webapi.model.stock.StockHeader;
+import com.dairypower.webapi.repository.GetCratesStockRepository;
 import com.dairypower.webapi.repository.GetCurrentStockRepository;
 import com.dairypower.webapi.repository.ItemStockDetailRepository;
 import com.dairypower.webapi.repository.StockDetailRepository;
@@ -34,6 +36,9 @@ public class StockController {
 	
 	@Autowired
 	GetCurrentStockRepository getCurrentStockRepository;
+	
+	@Autowired
+	GetCratesStockRepository getCratesStockRepository;
 	
 	// ----------------------------Save Stock ---------------------------
 	@RequestMapping(value = { "/saveStock" }, method = RequestMethod.POST)
@@ -117,6 +122,29 @@ public class StockController {
 		}
          
 		return getCurrentStock;
+
+	}
+	
+	@RequestMapping(value = { "/getCratesStock" }, method = RequestMethod.POST)
+	public @ResponseBody  GetCratesStock  getCratesStock(@RequestParam ("date") String date)
+	{
+		 
+		 GetCratesStock  getCratesStock = new   GetCratesStock ();
+		try {
+			 System.out.println("date " + date);
+			 getCratesStock = getCratesStockRepository.getCratesStock(date); 
+			 
+			if(getCratesStock==null)
+			{
+				getCratesStock = new   GetCratesStock ();
+			}
+			 
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+         
+		return getCratesStock;
 
 	}
 	
