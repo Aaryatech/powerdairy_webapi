@@ -125,6 +125,25 @@ public class StockController {
 
 	}
 	
+	@RequestMapping(value = { "/getCurrentStockByItemId" }, method = RequestMethod.POST)
+	public @ResponseBody List<GetCurrentStock> getCurrentStockByItemId(@RequestParam ("date") String date,
+			@RequestParam ("itemId") int itemId)
+	{
+		 
+		List<GetCurrentStock> getCurrentStock = new ArrayList<GetCurrentStock>();
+		try {
+			 
+			getCurrentStock = getCurrentStockRepository.getCurrentStockByItemId(date,itemId); 
+			 
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+         
+		return getCurrentStock;
+
+	}
+	
 	@RequestMapping(value = { "/getCratesStock" }, method = RequestMethod.POST)
 	public @ResponseBody  GetCratesStock  getCratesStock(@RequestParam ("date") String date)
 	{
