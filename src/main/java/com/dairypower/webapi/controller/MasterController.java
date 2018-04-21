@@ -31,6 +31,7 @@ import com.dairypower.webapi.model.master.Uom;
 import com.dairypower.webapi.model.master.User;
 import com.dairypower.webapi.model.master.UserType;
 import com.dairypower.webapi.model.master.Vehicle;
+import com.dairypower.webapi.model.master.VehicleRes;
 import com.dairypower.webapi.repository.BillPaymentRepository;
 import com.dairypower.webapi.repository.CurrencyRepository;
 import com.dairypower.webapi.repository.CustomerRepository;
@@ -48,6 +49,7 @@ import com.dairypower.webapi.repository.UomRepository;
 import com.dairypower.webapi.repository.UserRepository;
 import com.dairypower.webapi.repository.UserTypeRepository;
 import com.dairypower.webapi.repository.VehicleRepository;
+import com.dairypower.webapi.repository.VehicleResRepository;
 
 @RestController
 @RequestMapping("/master")
@@ -103,6 +105,8 @@ public class MasterController {
 
 	@Autowired
 	BillPaymentRepository billPaymentRepository;
+	@Autowired
+	VehicleResRepository vehicleResRepository;
 
 	// ----------------------------Save Item---------------------------
 	@RequestMapping(value = { "/saveItem" }, method = RequestMethod.POST)
@@ -833,5 +837,32 @@ public class MasterController {
 
 		return billPayment;
 	}
+	
+	
+	@RequestMapping(value = { "/getCalVehicleKm" }, method = RequestMethod.POST)
+	public @ResponseBody VehicleRes getCalVehicleKm(@RequestParam("vehId") int vehId) {
+
+		VehicleRes vehicleRes = vehicleResRepository.findCalVehicleRes(vehId);
+
+		return vehicleRes;
+	}
+	// ------------------------Update tvehicle inkm------------------------------------
+		@RequestMapping(value = { "/updateTvehicleKm" }, method = RequestMethod.POST)
+		public @ResponseBody Info updateTvehicleKm(@RequestParam int billTempId,@RequestParam int vehInKm) {
+
+			int isUpdated = tVehicleRepository.updateInKms(billTempId,vehInKm);
+			Info info = new Info();
+			if (isUpdated == 1) {
+				info.setError(false);
+				info.setMessage("Vehicle Inkms Updated Successfully");
+			} else {
+				info.setError(true);
+				info.setMessage("Vehicle Inkms Updated Failed");
+			}
+			return info;
+		}
+
+		// ------------------------------------------------------------------------
+	
 
 }

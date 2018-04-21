@@ -186,5 +186,24 @@ public class PoController {
 
 		}
 		//--------------------------------------------------------------------------
+		@RequestMapping(value = "/updatePoDetailList", method = RequestMethod.POST)
+		public @ResponseBody List<PoDetail> updatePoDetailList(@RequestBody List<PoDetail> poDetailList) {
+
+			List<PoDetail> poDetailRet  = new ArrayList<>();
+			try {
+				 
+				poDetailRet=poDetailRepository.saveAll(poDetailList);
+				
+				 
+			}
+			catch (Exception e) {
+				 
+				e.printStackTrace();
+
+			}
+			return poDetailRet;
+
+		}
+		//--------------------------------------------------------------------------
 
 }

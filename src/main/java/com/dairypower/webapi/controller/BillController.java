@@ -15,8 +15,10 @@ import com.dairypower.webapi.model.bill.BillDetail;
 import com.dairypower.webapi.model.bill.BillHeader;
 import com.dairypower.webapi.model.bill.GetBillDetail;
 import com.dairypower.webapi.model.bill.GetBillHeader;
+import com.dairypower.webapi.model.master.Info;
 import com.dairypower.webapi.model.master.RSHeader;
 import com.dairypower.webapi.model.master.RsDetail;
+import com.dairypower.webapi.model.master.TSetting;
 import com.dairypower.webapi.model.po.GetPoDetail;
 import com.dairypower.webapi.model.po.GetPoHeader;
 import com.dairypower.webapi.repository.BillDetailRepository;
@@ -24,6 +26,7 @@ import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.GetBillDetailRepository;
 import com.dairypower.webapi.repository.GetBillHeaderRepository;
 import com.dairypower.webapi.repository.RsDetailRepository;
+import com.dairypower.webapi.repository.TSettingRepository;
 
 @RestController
 public class BillController {
@@ -43,6 +46,9 @@ public class BillController {
 	@Autowired
 	RsDetailRepository rsDetailRepository;
 	
+	@Autowired
+	TSettingRepository tSettingRepository;
+	
 	// ----------------------------Save Bill---------------------------
 			@RequestMapping(value = { "/saveBill" }, method = RequestMethod.POST)
 			public @ResponseBody BillHeader saveBill(@RequestBody BillHeader billHeader) {
@@ -51,6 +57,7 @@ public class BillController {
 				List<BillDetail> billDetailList=new ArrayList<BillDetail>();
 				try {
 					billHeadeRes = billHeaderRepository.saveAndFlush(billHeader);
+				
 	                for(BillDetail billDetail:billHeader.getBillDetailList())
 	                {
 	                	billDetail.setBillTempId(billHeadeRes.getBillTempId());
@@ -96,7 +103,7 @@ public class BillController {
 					for(int i=0;i<getBillHeaderList.size();i++)
 					{
 						List<GetBillDetail> billDetailList=getBillDetailRepository.findAllByBillTempId(getBillHeaderList.get(i).getBillTempId());
-						getBillHeaderList.get(i).setGetBillDetailList(billDetailList);
+						getBillHeaderList.get(i).setBillDetailList(billDetailList);
 					}
 					
 				}
@@ -109,6 +116,25 @@ public class BillController {
 
 			}
 			//--------------------------------------------------------------------------
+			//--------------------------------------------------------------------------
+			@RequestMapping(value = "/getAllBillHeader", method = RequestMethod.POST)
+			public @ResponseBody List<BillHeader> getAllBillHeader(@RequestParam("date") String date) {
+
+				List<BillHeader> 	billHeaderList=new ArrayList<>();
+				try {
+				billHeaderList =billHeaderRepository.getAllBillHeader(date);
+					
+				}
+				catch (Exception e) {
+					billHeaderList=new ArrayList<>();
+					e.printStackTrace();
+
+				}
+				return billHeaderList;
+
+			}
+			//--------------------------------------------------------------------------
+			
 			// ----------------------------------------------------------------------
 			@RequestMapping(value = "/getBillHeaderDetails", method = RequestMethod.POST)
 			public @ResponseBody GetBillHeader getBillHeaderDetails(@RequestParam("billTempId") int billTempId) {
@@ -119,7 +145,7 @@ public class BillController {
 					
 					List<GetBillDetail> billDetailList=getBillDetailRepository.findAllByBillTempId(billTempId);
 					
-					billHeader.setGetBillDetailList(billDetailList);
+					billHeader.setBillDetailList(billDetailList);
 				}
 				catch (Exception e) {
 					billHeader=new GetBillHeader();
@@ -145,4 +171,35 @@ public class BillController {
 			}
 
 			// --------------------------------------------------------------------------------------
+			
+			@RequestMapping(value = { "/getSettingValue" }, method = RequestMethod.POST)
+			public @ResponseBody TSetting getSettingValue(@RequestParam("settingKey") String settingKey) {
+
+				TSetting settingRes = tSettingRepository.findBySettingKey(settingKey);
+
+				return settingRes;
+			}
+			@RequestMapping(value = { "/updateSetingValue" }, method = RequestMethod.POST)
+			public @ResponseBody Info updateSeetingForPB(@RequestParam("settingValue") int settingValue,
+					@RequestParam("settingKey") String settingKey) {
+
+				Info info = new Info();
+
+				int result = tSettingRepository.updateSetingValue(settingValue, settingKey);
+
+				if (result > 0) {
+
+					info.setError(false);
+					info.setMessage("Setting Value updated successfully");
+				}
+
+				else {
+
+					info.setError(true);
+					info.setMessage("Setting Value Not updated");
+				}
+
+				return info;
+
+			}
 }
