@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name="t_credit_note_header")
+@Table(name="t_credit_note_detail")
 public class CreditNoteDetail implements Serializable{
 
 	@Id

@@ -62,6 +62,9 @@ public class BillHeader implements Serializable{
 	@Column(name="is_settled")
 	private int isSettled;
 	
+	@Column(name="is_crn_generated")
+	private int isCrnGenerated;
+	
 	@Column(name="grand_total")
 	private float grandTotal;
 	
@@ -70,6 +73,14 @@ public class BillHeader implements Serializable{
 	List<BillDetail> billDetailList;
 	
 	
+     
+	public int getIsCrnGenerated() {
+		return isCrnGenerated;
+	}
+
+	public void setIsCrnGenerated(int isCrnGenerated) {
+		this.isCrnGenerated = isCrnGenerated;
+	}
 
 	public List<BillDetail> getBillDetailList() {
 		return billDetailList;

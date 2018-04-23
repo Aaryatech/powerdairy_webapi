@@ -23,6 +23,9 @@ public class CreditNoteHeader implements Serializable{
 	@Column(name="crn_header_id")
     private int crnHeaderId;
 	
+	@Column(name="bill_temp_id")
+    private int billTempId;
+	
 	@Column(name="crn_id")
     private String crnId;
 	
@@ -45,6 +48,14 @@ public class CreditNoteHeader implements Serializable{
 	List<CreditNoteDetail> creditNoteDetailList;
 	
 	
+	public int getBillTempId() {
+		return billTempId;
+	}
+
+	public void setBillTempId(int billTempId) {
+		this.billTempId = billTempId;
+	}
+
 	public List<CreditNoteDetail> getCreditNoteDetailList() {
 		return creditNoteDetailList;
 	}

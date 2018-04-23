@@ -7,4 +7,5 @@ import com.dairypower.webapi.model.cnote.CreditNoteHeader;
 @Repository
 public interface CreditNoteHeaderRepository extends JpaRepository<CreditNoteHeader, Integer>{
 
+
 }
