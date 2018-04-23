@@ -46,6 +46,9 @@ public class BillDetail implements Serializable{
 	
 	@Column(name="igst_per")
 	private float igstPer;
+	
+	@Column(name="po_detail_id")
+	private int poDetailId;
 
 	public int getBillDetailId() {
 		return billDetailId;
@@ -133,6 +136,14 @@ public class BillDetail implements Serializable{
 
 	public void setIgstPer(float igstPer) {
 		this.igstPer = igstPer;
+	}
+
+	public int getPoDetailId() {
+		return poDetailId;
+	}
+
+	public void setPoDetailId(int poDetailId) {
+		this.poDetailId = poDetailId;
 	}
 
 	@Override
