@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dairypower.webapi.model.LoginResponse;
 import com.dairypower.webapi.model.master.BillPayment;
 import com.dairypower.webapi.model.master.Currency;
 import com.dairypower.webapi.model.master.Customer;
@@ -49,7 +50,7 @@ import com.dairypower.webapi.repository.UomRepository;
 import com.dairypower.webapi.repository.UserRepository;
 import com.dairypower.webapi.repository.UserTypeRepository;
 import com.dairypower.webapi.repository.VehicleRepository;
-import com.dairypower.webapi.repository.VehicleResRepository;
+import com.dairypower.webapi.repository.VehicleResRepository; 
 
 @RestController
 @RequestMapping("/master")
@@ -863,6 +864,34 @@ public class MasterController {
 		}
 
 		// ------------------------------------------------------------------------
-	
+		@RequestMapping(value = { "/loginResponse" }, method = RequestMethod.POST)
+		public @ResponseBody LoginResponse loginResponse(@RequestParam ("userName") String userName,@RequestParam ("pass") String pass)
+		{
+			 
+			LoginResponse loginResponse = new LoginResponse();
+			try {
+				  
+				User user = userRepository.findByUserNameAndPasswordAndIsUsed(userName,pass,0);
+				if(user==null)
+				{
+					loginResponse.setError(true);
+					loginResponse.setMsg("login Failed");
+				}
+				else
+				{
+					loginResponse.setError(false);
+					loginResponse.setMsg("login successfully");
+					loginResponse.setUser(user);
+				}
+				 
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				loginResponse.setError(true);
+				loginResponse.setMsg("login Failed");
+			}
+	         
+			return loginResponse; 
+		}
 
 }

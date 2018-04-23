@@ -21,6 +21,9 @@ public class User implements Serializable{
 	@Column(name = "user_name")
 	private String userName;
 	
+	@Column(name = "password")
+	private String password;
+	
 	@Column(name = "user_mob_no")
 	private String userMobNo;
 	
@@ -70,10 +73,18 @@ public class User implements Serializable{
 		this.isUsed = isUsed;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", userMobNo=" + userMobNo + ", userType="
-				+ userTypeId + ", isUsed=" + isUsed + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userMobNo="
+				+ userMobNo + ", userTypeId=" + userTypeId + ", isUsed=" + isUsed + "]";
 	}
     
 	
