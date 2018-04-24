@@ -2,7 +2,6 @@ package com.dairypower.webapi.controller;
 
 import java.sql.Date;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,30 +98,31 @@ public class TestController {
 		return info;
 
 	}
-/*
-	// ---------------------------All Bill Header---------------------------------
-	@RequestMapping(value = "/getAllBillHeader", method = RequestMethod.GET)
-	public @ResponseBody List<BillHeader> getAllBillHeader() {
 
-		List<BillHeader> billHeaderList;
-		try {
-			billHeaderList = billHeaderRepository.findAll();
-
-			for (BillHeader billHeader : billHeaderList) {
-				List<BillDetail> billDetailList = billDetailRepository.findByBillTempId(billHeader.getBillTempId());
-				billHeader.setBillDetailList(billDetailList);
-			}
-		} catch (Exception e) {
-			billHeaderList = new ArrayList<>();
-
-			e.printStackTrace();
-
-		}
-		return billHeaderList;
-	}
-
-	// --------------------------------------------------------------------------------------
-*/	// ----------------------------Insert Bill Header----------------------------
+	/*
+	 * // ---------------------------All Bill
+	 * Header---------------------------------
+	 * 
+	 * @RequestMapping(value = "/getAllBillHeader", method = RequestMethod.GET)
+	 * public @ResponseBody List<BillHeader> getAllBillHeader() {
+	 * 
+	 * List<BillHeader> billHeaderList; try { billHeaderList =
+	 * billHeaderRepository.findAll();
+	 * 
+	 * for (BillHeader billHeader : billHeaderList) { List<BillDetail>
+	 * billDetailList =
+	 * billDetailRepository.findByBillTempId(billHeader.getBillTempId());
+	 * billHeader.setBillDetailList(billDetailList); } } catch (Exception e) {
+	 * billHeaderList = new ArrayList<>();
+	 * 
+	 * e.printStackTrace();
+	 * 
+	 * } return billHeaderList; }
+	 * 
+	 * //
+	 * -----------------------------------------------------------------------------
+	 * ---------
+	 */ // ----------------------------Insert Bill Header----------------------------
 	@RequestMapping(value = { "/insertBillDetail" }, method = RequestMethod.POST)
 	public @ResponseBody Info insertBillDetail(@RequestBody BillDetail billDetail) {
 
@@ -167,31 +167,35 @@ public class TestController {
 	}
 
 	// -------------------------------------------------------------------------
-/*	// ------------------------Getting Bill by Id-----------------------
-	@RequestMapping(value = { "/getAllBillListById" }, method = RequestMethod.POST)
-	public @ResponseBody List<BillDetail> getAllBillListById(@RequestParam("billDetailId") int billDetailId) {
-
-		List<BillDetail> billDetail = billDetailRepository.findByBillTempId(billDetailId);
-
-		return billDetail;
-	}
-
-	// -------------------------------------------------------------------------
-	// ------------------------Getting Header by Id-----------------------
-
-	@RequestMapping(value = { "/getHeaderListByTempId" }, method = RequestMethod.POST)
-	public @ResponseBody BillHeader getHeaderListByTempId(@RequestParam("billTempId") int billTempId) {
-
-		BillHeader billHeader = billHeaderRepository.findByBillTempId(billTempId);
-
-		List<BillDetail> billDetailList = billDetailRepository.findByBillTempId(billTempId);
-		billHeader.setBillDetailList(billDetailList);
-
-		return billHeader;
-	}
-
-	// -------------------------------------------------------------------------
-*/	// ------------------------DateWise Purchase Report-----------------------
+	/*
+	 * // ------------------------Getting Bill by Id-----------------------
+	 * 
+	 * @RequestMapping(value = { "/getAllBillListById" }, method =
+	 * RequestMethod.POST) public @ResponseBody List<BillDetail>
+	 * getAllBillListById(@RequestParam("billDetailId") int billDetailId) {
+	 * 
+	 * List<BillDetail> billDetail =
+	 * billDetailRepository.findByBillTempId(billDetailId);
+	 * 
+	 * return billDetail; }
+	 * 
+	 * // -------------------------------------------------------------------------
+	 * // ------------------------Getting Header by Id-----------------------
+	 * 
+	 * @RequestMapping(value = { "/getHeaderListByTempId" }, method =
+	 * RequestMethod.POST) public @ResponseBody BillHeader
+	 * getHeaderListByTempId(@RequestParam("billTempId") int billTempId) {
+	 * 
+	 * BillHeader billHeader = billHeaderRepository.findByBillTempId(billTempId);
+	 * 
+	 * List<BillDetail> billDetailList =
+	 * billDetailRepository.findByBillTempId(billTempId);
+	 * billHeader.setBillDetailList(billDetailList);
+	 * 
+	 * return billHeader; }
+	 * 
+	 * // -------------------------------------------------------------------------
+	 */ // ------------------------DateWise Purchase Report-----------------------
 
 	@RequestMapping(value = "/getDatewisePurchase", method = RequestMethod.POST)
 	public @ResponseBody List<DatewisePurchaseReport> getDatewisePurchase(@RequestParam("fromDate") Date fromDate,

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class VehiclewiseReport {
 	@Id
 	private int tVehId;
-	
+
 	private int vehId;
 
 	private Date date;
@@ -17,6 +17,16 @@ public class VehiclewiseReport {
 	private int inKms;
 
 	private int outKm;
+
+	private int totalKm;
+
+	public int getTotalKm() {
+		return totalKm;
+	}
+
+	public void setTotalKm(int totalKm) {
+		this.totalKm = totalKm;
+	}
 
 	private String custName;
 
@@ -70,8 +80,8 @@ public class VehiclewiseReport {
 
 	@Override
 	public String toString() {
-		return "VehiclewiseReport [vehId=" + vehId + ", tVehId=" + tVehId + ", date=" + date + ", inKms=" + inKms
-				+ ", outKm=" + outKm + ", custName=" + custName + "]";
+		return "VehiclewiseReport [tVehId=" + tVehId + ", vehId=" + vehId + ", date=" + date + ", inKms=" + inKms
+				+ ", outKm=" + outKm + ", totalKm=" + totalKm + ", custName=" + custName + "]";
 	}
 
 }
