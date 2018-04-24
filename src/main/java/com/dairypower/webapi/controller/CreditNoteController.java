@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dairypower.webapi.model.cnote.CreditNoteDetail;
+import com.dairypower.webapi.model.cnote.CreditNoteDetails;
 import com.dairypower.webapi.model.cnote.CreditNoteHeader;
+import com.dairypower.webapi.model.cnote.CrnHeader;
 import com.dairypower.webapi.model.master.Info;
 import com.dairypower.webapi.model.po.PoDetail;
 import com.dairypower.webapi.model.po.PoHeader;
 import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.CreditNoteDetailRepository;
+import com.dairypower.webapi.repository.CreditNoteDetailsRepository;
 import com.dairypower.webapi.repository.CreditNoteHeaderRepository;
+import com.dairypower.webapi.repository.CrnHeaderRepository;
 
 @RestController
 public class CreditNoteController {
@@ -30,7 +34,13 @@ public class CreditNoteController {
 	CreditNoteDetailRepository creditNoteDetailRepository;
 	
 	@Autowired
+	CreditNoteDetailsRepository creditNoteDetailsRepository;
+	
+	@Autowired
 	BillHeaderRepository billHeaderRepository;
+	
+	@Autowired
+	CrnHeaderRepository crnHeaderRepository;
 	
 	// ----------------------------Save Credit Note---------------------------
 	@RequestMapping(value = { "/saveCreditNote" }, method = RequestMethod.POST)
@@ -73,5 +83,30 @@ public class CreditNoteController {
 		}
 
 		// ------------------------------------------------------------------------
-// ----------------------------------------------------------------------
+		
+		@RequestMapping(value = { "/getAllCrn" }, method = RequestMethod.POST)
+		public @ResponseBody List<CrnHeader> getCRNHeaders(@RequestParam("fromDate")String fromDate,@RequestParam("toDate")String toDate) {
+          
+			List<CrnHeader> crnHeaders=crnHeaderRepository.findAllCrn(fromDate,toDate);
+			if(!crnHeaders.isEmpty()) {
+			for(int i=0;i<crnHeaders.size();i++)
+			{
+				List<CreditNoteDetails> creditNoteDetails=creditNoteDetailsRepository.findByCrnHeaderId(crnHeaders.get(i).getCrnHeaderId());
+		
+				crnHeaders.get(i).setCreditNoteDetailList(creditNoteDetails);
+			}
+			}
+			return crnHeaders;
+		}
+     // ----------------------------------------------------------------------
+		
+		@RequestMapping(value = { "/getCrnById" }, method = RequestMethod.POST)
+		public @ResponseBody CrnHeader getCrnById(@RequestParam("crnHeaderId")int crnHeaderId) {
+
+			CrnHeader crnHeaders=crnHeaderRepository.getCrnById(crnHeaderId);
+			List<CreditNoteDetails> creditNoteDetails=creditNoteDetailsRepository.findByCrnHeaderId(crnHeaderId);
+		
+				crnHeaders.setCreditNoteDetailList(creditNoteDetails);
+			return crnHeaders;
+		}
 }

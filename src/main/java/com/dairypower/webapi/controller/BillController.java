@@ -15,6 +15,7 @@ import com.dairypower.webapi.model.bill.BillDetail;
 import com.dairypower.webapi.model.bill.BillHeader;
 import com.dairypower.webapi.model.bill.GetBillDetail;
 import com.dairypower.webapi.model.bill.GetBillHeader;
+import com.dairypower.webapi.model.master.GetBillHeaders;
 import com.dairypower.webapi.model.master.Info;
 import com.dairypower.webapi.model.master.RSHeader;
 import com.dairypower.webapi.model.master.RsDetail;
@@ -25,6 +26,7 @@ import com.dairypower.webapi.repository.BillDetailRepository;
 import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.GetBillDetailRepository;
 import com.dairypower.webapi.repository.GetBillHeaderRepository;
+import com.dairypower.webapi.repository.GetBillHeadersRepository;
 import com.dairypower.webapi.repository.RsDetailRepository;
 import com.dairypower.webapi.repository.TSettingRepository;
 
@@ -33,6 +35,9 @@ public class BillController {
 	
 	@Autowired
 	BillHeaderRepository billHeaderRepository;
+	
+	@Autowired
+	GetBillHeadersRepository getBillHeadersRepository;
 	
 	@Autowired
 	GetBillHeaderRepository getBillHeaderRepository;
@@ -94,11 +99,11 @@ public class BillController {
 			}
 			//--------------------------------------------------------------------------
 			@RequestMapping(value = "/getSettledBills", method = RequestMethod.POST)
-			public @ResponseBody List<GetBillHeader> getSettledBills(@RequestParam("date") String date,@RequestParam("isSettled") int isSettled) {
+			public @ResponseBody List<GetBillHeaders> getSettledBills(@RequestParam("date") String date,@RequestParam("isSettled") int isSettled) {
 
-				List<GetBillHeader> 	getBillHeaderList=new ArrayList<>();
+				List<GetBillHeaders> 	getBillHeaderList=new ArrayList<>();
 				try {
-				getBillHeaderList = getBillHeaderRepository.getSettledBills(date,isSettled);
+				getBillHeaderList = getBillHeadersRepository.getSettledBills(date,isSettled);
 					
 					for(int i=0;i<getBillHeaderList.size();i++)
 					{

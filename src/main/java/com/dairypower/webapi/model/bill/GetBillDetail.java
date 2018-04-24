@@ -49,6 +49,18 @@ public class GetBillDetail implements Serializable{
 	@Column(name="igst_per")
 	private float igstPer;
 
+	@Column(name="po_detail_id")
+	private int poDetailId;
+	
+	
+	
+	public int getPoDetailId() {
+		return poDetailId;
+	}
+
+	public void setPoDetailId(int poDetailId) {
+		this.poDetailId = poDetailId;
+	}
 
 	public int getBillDetailId() {
 		return billDetailId;

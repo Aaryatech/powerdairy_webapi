@@ -206,4 +206,22 @@ public class PoController {
 		}
 		//--------------------------------------------------------------------------
 
+		@RequestMapping(value = "/getPoDetailsBalance", method = RequestMethod.POST)
+		public @ResponseBody List<PoDetail> getPoDetailsBalance(@RequestParam("poIdList") List<String> poIdList) {
+
+			List<PoDetail> poDetailList  = new ArrayList<PoDetail>();
+			try {
+				 
+				  poDetailList=poDetailRepository.getPoDetailsBalance(poIdList);
+				
+				 
+			}
+			catch (Exception e) {
+				 
+				e.printStackTrace();
+
+			}
+			return poDetailList;
+
+		}
 }

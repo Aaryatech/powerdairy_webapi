@@ -29,6 +29,9 @@ public class TVehicle implements Serializable{
 	@Column(name="in_kms")
 	private int inKms;
 	
+	@Column(name="out_km")
+	private int outKm;
+	
 	@Column(name="remark")
 	private String remark;
 	
@@ -43,6 +46,15 @@ public class TVehicle implements Serializable{
 	
 	@Column(name="driver_name")
 	private String driverName;
+
+	
+	public int getOutKm() {
+		return outKm;
+	}
+
+	public void setOutKm(int outKm) {
+		this.outKm = outKm;
+	}
 
 	public int gettVehId() {
 		return tVehId;
@@ -119,8 +131,9 @@ public class TVehicle implements Serializable{
 	@Override
 	public String toString() {
 		return "TVehicle [tVehId=" + tVehId + ", vehId=" + vehId + ", billTempId=" + billTempId + ", inKms=" + inKms
-				+ ", remark=" + remark + ", entryBy=" + entryBy + ", date=" + date + ", datetime=" + datetime
-				+ ", driverName=" + driverName + "]";
+				+ ", outKm=" + outKm + ", remark=" + remark + ", entryBy=" + entryBy + ", date=" + date + ", datetime="
+				+ datetime + ", driverName=" + driverName + "]";
 	}
+
 	
 }

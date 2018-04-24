@@ -790,7 +790,7 @@ public class MasterController {
 
 		List<Currency> currencyList;
 		try {
-			currencyList = currencyRepository.findAllByIsUsed(1);
+			currencyList = currencyRepository.findAllByIsUsed(0);
 		} catch (Exception e) {
 			currencyList = new ArrayList<>();
 
