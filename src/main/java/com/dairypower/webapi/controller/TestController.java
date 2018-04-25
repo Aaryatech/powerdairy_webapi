@@ -256,11 +256,20 @@ public class TestController {
 
 	@RequestMapping(value = "/getAllBillwiseConsumption", method = RequestMethod.POST)
 	public @ResponseBody List<BillwiseConsumptionReport> getBillwiseConsumption(
-			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate,@RequestParam("custId") int custId) {
 
 		List<BillwiseConsumptionReport> billwiseConList;
 		try {
+			if(custId==0)
+			{
 			billwiseConList = billwiseConsumptionRepository.findBillwiseConReport(fromDate, toDate);
+			}
+			else
+			{
+				billwiseConList = billwiseConsumptionRepository.findBillwiseConWithCatReport(fromDate, toDate,custId);
+
+			}
+			
 		} catch (Exception e) {
 			billwiseConList = new ArrayList<>();
 			e.printStackTrace();
