@@ -13,6 +13,9 @@ import javax.persistence.Id;
 public class BillwiseConsumptionReport {
 
 	@Id
+	@Column(name = "bill_temp_id")
+	private int billTempId;
+	
 	private int billId;
 
 	@Column(name = "bill_date")
@@ -42,9 +45,30 @@ public class BillwiseConsumptionReport {
 
 	@Column(name = "crates_cl_bal")
 	private int cratesClBal;
+	
+	@Column(name = "grand_total")
+	private float grandTotal;
 
 	@Column(name = "remarks")
 	private String remarks;
+
+	
+	
+	public int getBillTempId() {
+		return billTempId;
+	}
+
+	public float getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setBillTempId(int billTempId) {
+		this.billTempId = billTempId;
+	}
+
+	public void setGrandTotal(float grandTotal) {
+		this.grandTotal = grandTotal;
+	}
 
 	public int getBillId() {
 		return billId;
