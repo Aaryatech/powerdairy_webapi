@@ -35,7 +35,7 @@ public class BillPayment implements Serializable {
 	private String chequeNo;
 	
 	@Column(name="cheque_date")
-	private Date chequeDate;
+	private String chequeDate;
 	
 	@Column(name="cheque_amt")
 	private float chequeAmt;
@@ -133,12 +133,12 @@ public class BillPayment implements Serializable {
 	public void setTotalAmt(float totalAmt) {
 		this.totalAmt = totalAmt;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getChequeDate() {
+	 
+	public String getChequeDate() {
 		return chequeDate;
 	}
 
-	public void setChequeDate(Date chequeDate) {
+	public void setChequeDate(String chequeDate) {
 		this.chequeDate = chequeDate;
 	}
 

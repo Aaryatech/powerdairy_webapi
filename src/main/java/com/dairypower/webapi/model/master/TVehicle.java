@@ -39,7 +39,7 @@ public class TVehicle implements Serializable{
 	private int entryBy;
 	
 	@Column(name="date")
-	private Date date;
+	private String date;
 	
 	@Column(name="datetime")
 	private String datetime;
@@ -79,8 +79,8 @@ public class TVehicle implements Serializable{
 	public int getEntryBy() {
 		return entryBy;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getDate() {
+	 
+	public String getDate() {
 		return date;
 	}
 
@@ -116,7 +116,7 @@ public class TVehicle implements Serializable{
 		this.entryBy = entryBy;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

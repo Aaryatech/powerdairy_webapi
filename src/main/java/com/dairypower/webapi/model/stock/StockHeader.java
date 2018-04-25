@@ -23,7 +23,7 @@ public class StockHeader implements Serializable{
 	private int stockHeaderId;
 	
 	@Column(name="date")
-	private Date date;
+	private String date;
 	
 	@Column(name="status")
 	private int status;
@@ -53,12 +53,12 @@ public class StockHeader implements Serializable{
 	public void setStockHeaderId(int stockHeaderId) {
 		this.stockHeaderId = stockHeaderId;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getDate() {
+	 
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

@@ -27,7 +27,7 @@ public class CrnHeader implements Serializable{
     private String crnId;
 	
 	@Column(name="crn_date")
-    private Date crnDate;
+    private String crnDate;
 	
 	@Column(name="crn_datetime")
     private String crnDatetime;
@@ -57,8 +57,8 @@ public class CrnHeader implements Serializable{
 	public String getCrnId() {
 		return crnId;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getCrnDate() {
+ 
+	public String getCrnDate() {
 		return crnDate;
 	}
 
@@ -98,7 +98,7 @@ public class CrnHeader implements Serializable{
 		this.crnId = crnId;
 	}
 
-	public void setCrnDate(Date crnDate) {
+	public void setCrnDate(String crnDate) {
 		this.crnDate = crnDate;
 	}
 

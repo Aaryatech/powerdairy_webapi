@@ -26,7 +26,7 @@ public class PoHeader implements Serializable{
 	private int poId;
 	
 	@Column(name="po_date")
-	private Date poDate;
+	private String poDate;
 	
 	@Column(name="po_datetime")
 	private String poDatetime;
@@ -70,12 +70,15 @@ public class PoHeader implements Serializable{
 	public void setPoId(int poId) {
 		this.poId = poId;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getPoDate() {
+	
+
+	
+	
+	public String getPoDate() {
 		return poDate;
 	}
 
-	public void setPoDate(Date poDate) {
+	public void setPoDate(String poDate) {
 		this.poDate = poDate;
 	}
 

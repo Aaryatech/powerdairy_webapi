@@ -39,6 +39,8 @@ public class PoController {
 	@RequestMapping(value = { "/savePo" }, method = RequestMethod.POST)
 	public @ResponseBody PoHeader saveBill(@RequestBody PoHeader poHeader) {
 
+		System.out.println("Po Header "+poHeader.toString());
+		
 		PoHeader poHeadeRes = null;
 		List<PoDetail> poDetailList = new ArrayList<PoDetail>();
 		try {

@@ -30,7 +30,7 @@ public class CreditNoteHeader implements Serializable{
     private String crnId;
 	
 	@Column(name="crn_date")
-    private Date crnDate;
+    private String crnDate;
 	
 	@Column(name="crn_datetime")
     private String crnDatetime;
@@ -79,12 +79,12 @@ public class CreditNoteHeader implements Serializable{
 	public void setCrnId(String crnId) {
 		this.crnId = crnId;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getCrnDate() {
+	 
+	public String getCrnDate() {
 		return crnDate;
 	}
 
-	public void setCrnDate(Date crnDate) {
+	public void setCrnDate(String crnDate) {
 		this.crnDate = crnDate;
 	}
 

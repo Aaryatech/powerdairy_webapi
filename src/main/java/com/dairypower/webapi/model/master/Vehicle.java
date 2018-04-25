@@ -30,7 +30,7 @@ public class Vehicle implements Serializable{
 	private int vehOpKms;
 	
 	@Column(name = "veh_op_kms_date")
-	private Date vehOpKmsDate;
+	private String vehOpKmsDate;
 	
 	@Column(name = "is_used")
 	private int isUsed;
@@ -66,12 +66,12 @@ public class Vehicle implements Serializable{
 	public void setVehOpKms(int vehOpKms) {
 		this.vehOpKms = vehOpKms;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getVehOpKmsDate() {
+	 
+	public String getVehOpKmsDate() {
 		return vehOpKmsDate;
 	}
 
-	public void setVehOpKmsDate(Date vehOpKmsDate) {
+	public void setVehOpKmsDate(String vehOpKmsDate) {
 		this.vehOpKmsDate = vehOpKmsDate;
 	}
 

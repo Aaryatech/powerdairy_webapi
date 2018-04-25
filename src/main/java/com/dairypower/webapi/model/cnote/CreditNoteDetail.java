@@ -28,7 +28,7 @@ public class CreditNoteDetail implements Serializable{
     private int batchId;
 
 	@Column(name="pack_date")
-    private Date packDate;
+    private String packDate;
 	
 	@Column(name="item_id")
     private int itemId;
@@ -62,12 +62,12 @@ public class CreditNoteDetail implements Serializable{
 	public void setBatchId(int batchId) {
 		this.batchId = batchId;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getPackDate() {
+	 
+	public String getPackDate() {
 		return packDate;
 	}
 
-	public void setPackDate(Date packDate) {
+	public void setPackDate(String packDate) {
 		this.packDate = packDate;
 	}
 

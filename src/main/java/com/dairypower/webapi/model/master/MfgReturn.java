@@ -21,7 +21,7 @@ public class MfgReturn implements Serializable{
 	private int tReturnId;
 	
 	@Column(name="date")
-	private Date date;
+	private String date;
 	
 	@Column(name="datetime")
 	private String datetime;
@@ -47,8 +47,8 @@ public class MfgReturn implements Serializable{
 	public int gettReturnId() {
 		return tReturnId;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getDate() {
+	 
+	public String getDate() {
 		return date;
 	}
 
@@ -80,7 +80,7 @@ public class MfgReturn implements Serializable{
 		this.tReturnId = tReturnId;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

@@ -30,7 +30,7 @@ public class PoDetail implements Serializable{
 	private Date packingDate;
 	
 	@Column(name="mfg_date")
-	private Date mfgDate;
+	private String mfgDate;
 	
 	@Column(name="item_id")
 	private int itemId;
@@ -56,12 +56,13 @@ public class PoDetail implements Serializable{
 	@Column(name="balance")
 	private int balance;
 
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getMfgDate() {
+	 
+
+	public String getMfgDate() {
 		return mfgDate;
 	}
 
-	public void setMfgDate(Date mfgDate) {
+	public void setMfgDate(String mfgDate) {
 		this.mfgDate = mfgDate;
 	}
 

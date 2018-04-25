@@ -27,7 +27,7 @@ public class BillHeader implements Serializable{
 	private int billId;
 	
 	@Column(name="bill_date")
-	private Date billDate;
+	private String billDate;
 	
 	@Column(name="cust_id")
 	private int custId;
@@ -113,12 +113,12 @@ public class BillHeader implements Serializable{
 	public void setBillId(int billId) {
 		this.billId = billId;
 	}
-	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getBillDate() {
+	 
+	public String getBillDate() {
 		return billDate;
 	}
 	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public void setBillDate(Date billDate) {
+	public void setBillDate(String billDate) {
 		this.billDate = billDate;
 	}
 
