@@ -283,12 +283,18 @@ public class TestController {
 	// ------------------------Categorywise ConsumptionReport-----------------
 	@RequestMapping(value = "/getAllCatwiseConsumption", method = RequestMethod.POST)
 	public @ResponseBody List<CategorywiseConsumptionReport> getAllCatwiseConsumption(
-			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate, @RequestParam("catId") int catId) {
 
 		List<CategorywiseConsumptionReport> catwiseConList;
 		try {
+			if(catId==0)
+			{
 			catwiseConList = categorywiseConsumptionRepository.findCatwiseConReport(fromDate, toDate);
-
+			}
+			else
+			{
+				catwiseConList = categorywiseConsumptionRepository.findCatwiseConCatIdReport(fromDate, toDate,catId);			
+			}
 		} catch (Exception e) {
 			catwiseConList = new ArrayList<>();
 			e.printStackTrace();

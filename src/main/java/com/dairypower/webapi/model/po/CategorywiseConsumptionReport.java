@@ -8,9 +8,13 @@ import javax.persistence.Id;
 @Entity
 public class CategorywiseConsumptionReport {
 	@Id
+	private int billDetailId;
+	
 	private int billTempId;
 
 	private int itemId;
+	
+	private int itemCatId;
 
 	private int billQty;
 
@@ -27,6 +31,23 @@ public class CategorywiseConsumptionReport {
 	private float rate;
 
 	private String itemName;
+
+	
+	public int getBillDetailId() {
+		return billDetailId;
+	}
+
+	public int getItemCatId() {
+		return itemCatId;
+	}
+
+	public void setBillDetailId(int billDetailId) {
+		this.billDetailId = billDetailId;
+	}
+
+	public void setItemCatId(int itemCatId) {
+		this.itemCatId = itemCatId;
+	}
 
 	public int getBillTempId() {
 		return billTempId;
