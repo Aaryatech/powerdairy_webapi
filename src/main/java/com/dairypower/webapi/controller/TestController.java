@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dairypower.webapi.model.bill.BillDetail;
 import com.dairypower.webapi.model.bill.BillHeader;
+import com.dairypower.webapi.model.bill.CatwiseReport;
 import com.dairypower.webapi.model.bill.CustomerRemAmt;
+import com.dairypower.webapi.model.bill.DateRemAmt;
+import com.dairypower.webapi.model.bill.DatewiseSaleReport;
 import com.dairypower.webapi.model.master.Info;
 
 import com.dairypower.webapi.model.po.BillwiseConsumptionReport;
@@ -30,10 +33,13 @@ import com.dairypower.webapi.repository.BillDetailRepository;
 import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.BillwiseConsumptionRepository;
 import com.dairypower.webapi.repository.BillwisePurchaseRepository;
+import com.dairypower.webapi.repository.CatWiseReportRepository;
 import com.dairypower.webapi.repository.CategorywiseConsumptionRepository;
 import com.dairypower.webapi.repository.CustomerOutstandingAmtRepo;
 import com.dairypower.webapi.repository.CustomerwiseReportRepository;
+import com.dairypower.webapi.repository.DateRemAmtRepository;
 import com.dairypower.webapi.repository.DatewisePurRepository;
+import com.dairypower.webapi.repository.DatewiseSaleReportRepository;
 import com.dairypower.webapi.repository.ItemCategoryRepository;
 import com.dairypower.webapi.repository.ItemwisePurchaseRepository;
 
@@ -74,6 +80,15 @@ public class TestController {
 
 	@Autowired
 	VehiclewiseReportRpository vehiclewiseReportRpository;
+	
+	@Autowired
+	CatWiseReportRepository catWiseReportRepository;
+	
+	@Autowired
+	DatewiseSaleReportRepository datewiseSaleReportRepository;
+	
+	@Autowired
+	DateRemAmtRepository dateRemAmtRepository;
 
 	// --------------------------------------------------------------------------------------
 	// ----------------------------Insert Bill Header----------------------------
@@ -283,6 +298,36 @@ public class TestController {
 		return billwiseConList;
 
 	}
+	@RequestMapping(value = "/getAllDatewiseConsumption", method = RequestMethod.POST)
+	public @ResponseBody List<DatewiseSaleReport> getAllDatewiseConsumption(
+			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+
+		List<DatewiseSaleReport> dateWiseList;
+		try {
+			
+			dateWiseList = datewiseSaleReportRepository.findDatewiseConReport(fromDate, toDate);
+			List<DateRemAmt> remAmtList=dateRemAmtRepository.findDateWiseOutstandingAmt(fromDate, toDate);
+
+			for(int i=0;i<dateWiseList.size();i++)
+			{
+				for(int j=0;j<remAmtList.size();j++)
+				{
+					if(dateWiseList.get(i).getBillDate().equals(remAmtList.get(j).getBillDate()))
+					{
+						dateWiseList.get(i).setOutstandingAmt(remAmtList.get(j).getOutstandingAmt());
+					}
+					
+				}
+			}
+		} catch (Exception e) {
+			dateWiseList = new ArrayList<>();
+			e.printStackTrace();
+
+		}
+		return dateWiseList;
+
+	}
+
 
 	// -------------------------------------------------------------------------
 	// ------------------------Categorywise ConsumptionReport-----------------
@@ -310,6 +355,31 @@ public class TestController {
 	}
 
 	// -------------------------------------------------------------------------
+	// ------------------------Categorywise Consumption Report-----------------
+		@RequestMapping(value = "/getAllCatwiseReport", method = RequestMethod.POST)
+		public @ResponseBody List<CatwiseReport> getAllCatwiseReport(
+				@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate, @RequestParam("catId") int catId) {
+
+			List<CatwiseReport> catwiseConList;
+			try {
+				if(catId==0)
+				{
+				catwiseConList = catWiseReportRepository.findCatwiseConReport(fromDate, toDate);
+				}
+				else
+				{
+					catwiseConList = catWiseReportRepository.findCatwiseConCatIdReport(fromDate, toDate,catId);			
+				}
+			} catch (Exception e) {
+				catwiseConList = new ArrayList<>();
+				e.printStackTrace();
+
+			}
+			return catwiseConList;
+
+		}
+
+		// -------------------------------------------------------------------------
 	// ------------------------Customerwise Consumption Report-------
 
 	@RequestMapping(value = "/getAllCustomerwiseReport", method = RequestMethod.POST)

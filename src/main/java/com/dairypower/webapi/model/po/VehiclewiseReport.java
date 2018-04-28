@@ -11,6 +11,8 @@ public class VehiclewiseReport {
 	private int tVehId;
 
 	private int vehId;
+	
+	private String vehName;
 
 	private Date date;
 
@@ -19,6 +21,15 @@ public class VehiclewiseReport {
 	private int outKm;
 
 	private int totalKm;
+
+	
+	public String getVehName() {
+		return vehName;
+	}
+
+	public void setVehName(String vehName) {
+		this.vehName = vehName;
+	}
 
 	public int getTotalKm() {
 		return totalKm;
