@@ -4,21 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
-
 public class CustomerwiseReport {
 
-	@Id
+	
 	private int billTempId;
 
+	@Id
 	private int custId;
 	
 	private int billId;
-	
-	private int inKms;
-	
-	private int outKm;
+
 
 	private Date billDate;
 
@@ -26,6 +24,7 @@ public class CustomerwiseReport {
 
 	private float collectedAmt;
 
+	@Transient
 	private float outstandingAmt;
 	
 	private int collectionPaymode;
@@ -34,9 +33,8 @@ public class CustomerwiseReport {
 
 	private int cratesIssued;
 
-	private int cratesClBal;
 
-	private int crates_received;
+	private int cratesReceived;
 	
 	private float grandTotal;
 
@@ -64,21 +62,6 @@ public class CustomerwiseReport {
 		this.billId = billId;
 	}
 
-	public int getInKms() {
-		return inKms;
-	}
-
-	public void setInKms(int inKms) {
-		this.inKms = inKms;
-	}
-
-	public int getOutKm() {
-		return outKm;
-	}
-
-	public void setOutKm(int outKm) {
-		this.outKm = outKm;
-	}
 
 	public Date getBillDate() {
 		return billDate;
@@ -136,20 +119,14 @@ public class CustomerwiseReport {
 		this.cratesIssued = cratesIssued;
 	}
 
-	public int getCratesClBal() {
-		return cratesClBal;
+
+
+	public int getCratesReceived() {
+		return cratesReceived;
 	}
 
-	public void setCratesClBal(int cratesClBal) {
-		this.cratesClBal = cratesClBal;
-	}
-
-	public int getCrates_received() {
-		return crates_received;
-	}
-
-	public void setCrates_received(int crates_received) {
-		this.crates_received = crates_received;
+	public void setCratesReceived(int cratesReceived) {
+		this.cratesReceived = cratesReceived;
 	}
 
 	public float getGrandTotal() {
@@ -162,11 +139,10 @@ public class CustomerwiseReport {
 
 	@Override
 	public String toString() {
-		return "CustomerwiseReport [billTempId=" + billTempId + ", custId=" + custId + ", billId=" + billId + ", inKms="
-				+ inKms + ", outKm=" + outKm + ", billDate=" + billDate + ", custName=" + custName + ", collectedAmt="
+		return "CustomerwiseReport [billTempId=" + billTempId + ", custId=" + custId + ", billId=" + billId + ",  billDate=" + billDate + ", custName=" + custName + ", collectedAmt="
 				+ collectedAmt + ", outstandingAmt=" + outstandingAmt + ", collectionPaymode=" + collectionPaymode
-				+ ", cratesOpBal=" + cratesOpBal + ", cratesIssued=" + cratesIssued + ", cratesClBal=" + cratesClBal
-				+ ", crates_received=" + crates_received + ", grandTotal=" + grandTotal + "]";
+				+ ", cratesOpBal=" + cratesOpBal + ", cratesIssued=" + cratesIssued  
+				+ ", crates_received=" + cratesReceived + ", grandTotal=" + grandTotal + "]";
 	}
 	
 	

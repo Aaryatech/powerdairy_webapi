@@ -33,8 +33,14 @@ public class CreditNoteDetail implements Serializable{
 	@Column(name="item_id")
     private int itemId;
 	
-	@Column(name="qty")
-    private int qty;
+	@Column(name="scrap_type")
+    private int scrapType;
+	
+	@Column(name="leakage_qty")
+    private int leakageQty;
+	
+	@Column(name="expire_qty")
+    private int expireQty;
 	
 	@Column(name="rate")
     private float rate;
@@ -79,13 +85,6 @@ public class CreditNoteDetail implements Serializable{
 		this.itemId = itemId;
 	}
 
-	public int getQty() {
-		return qty;
-	}
-
-	public void setQty(int qty) {
-		this.qty = qty;
-	}
 
 	public float getRate() {
 		return rate;
@@ -94,11 +93,35 @@ public class CreditNoteDetail implements Serializable{
 	public void setRate(float rate) {
 		this.rate = rate;
 	}
+    
+	public int getScrapType() {
+		return scrapType;
+	}
+
+	public int getLeakageQty() {
+		return leakageQty;
+	}
+
+	public int getExpireQty() {
+		return expireQty;
+	}
+
+	public void setScrapType(int scrapType) {
+		this.scrapType = scrapType;
+	}
+
+	public void setLeakageQty(int leakageQty) {
+		this.leakageQty = leakageQty;
+	}
+
+	public void setExpireQty(int expireQty) {
+		this.expireQty = expireQty;
+	}
 
 	@Override
 	public String toString() {
 		return "CrnDetailId [crnDetailId=" + crnDetailId + ", crnHeaderId=" + crnHeaderId + ", batchId=" + batchId
-				+ ", packDate=" + packDate + ", itemId=" + itemId + ", qty=" + qty + ", rate=" + rate + "]";
+				+ ", packDate=" + packDate + ", itemId=" + itemId + ", rate=" + rate + "]";
 	}
 
 }

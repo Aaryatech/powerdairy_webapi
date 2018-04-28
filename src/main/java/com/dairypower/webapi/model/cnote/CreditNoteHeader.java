@@ -38,9 +38,6 @@ public class CreditNoteHeader implements Serializable{
 	@Column(name="cust_id")
     private int custId;
 	
-	@Column(name="scrap_type")
-    private int scrapType;
-	
 	@Column(name="remarks")
     private String remarks;
 
@@ -104,13 +101,6 @@ public class CreditNoteHeader implements Serializable{
 		this.custId = custId;
 	}
 
-	public int getScrapType() {
-		return scrapType;
-	}
-
-	public void setScrapType(int scrapType) {
-		this.scrapType = scrapType;
-	}
 
 	public String getRemarks() {
 		return remarks;
@@ -123,7 +113,7 @@ public class CreditNoteHeader implements Serializable{
 	@Override
 	public String toString() {
 		return "CreditNoteHeader [crnHeaderId=" + crnHeaderId + ", crnId=" + crnId + ", crnDate=" + crnDate
-				+ ", crnDatetime=" + crnDatetime + ", custId=" + custId + ", scrapType=" + scrapType + ", remarks="
+				+ ", crnDatetime=" + crnDatetime + ", custId=" + custId + ", remarks="
 				+ remarks + "]";
 	}
 

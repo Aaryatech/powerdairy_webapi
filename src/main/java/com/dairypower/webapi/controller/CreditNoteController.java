@@ -16,8 +16,6 @@ import com.dairypower.webapi.model.cnote.CreditNoteDetails;
 import com.dairypower.webapi.model.cnote.CreditNoteHeader;
 import com.dairypower.webapi.model.cnote.CrnHeader;
 import com.dairypower.webapi.model.master.Info;
-import com.dairypower.webapi.model.po.PoDetail;
-import com.dairypower.webapi.model.po.PoHeader;
 import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.CreditNoteDetailRepository;
 import com.dairypower.webapi.repository.CreditNoteDetailsRepository;

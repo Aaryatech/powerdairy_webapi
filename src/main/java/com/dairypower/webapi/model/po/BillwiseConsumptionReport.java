@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class BillwiseConsumptionReport {
 
@@ -77,7 +79,7 @@ public class BillwiseConsumptionReport {
 	public void setBillId(int billId) {
 		this.billId = billId;
 	}
-
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public Date getBillDate() {
 		return billDate;
 	}

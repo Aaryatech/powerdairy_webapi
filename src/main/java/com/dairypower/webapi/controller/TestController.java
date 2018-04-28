@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dairypower.webapi.model.bill.BillDetail;
 import com.dairypower.webapi.model.bill.BillHeader;
+import com.dairypower.webapi.model.bill.CustomerRemAmt;
 import com.dairypower.webapi.model.master.Info;
 
 import com.dairypower.webapi.model.po.BillwiseConsumptionReport;
@@ -30,6 +31,7 @@ import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.BillwiseConsumptionRepository;
 import com.dairypower.webapi.repository.BillwisePurchaseRepository;
 import com.dairypower.webapi.repository.CategorywiseConsumptionRepository;
+import com.dairypower.webapi.repository.CustomerOutstandingAmtRepo;
 import com.dairypower.webapi.repository.CustomerwiseReportRepository;
 import com.dairypower.webapi.repository.DatewisePurRepository;
 import com.dairypower.webapi.repository.ItemCategoryRepository;
@@ -45,6 +47,9 @@ public class TestController {
 
 	@Autowired
 	CustomerwiseReportRepository customerwiseReportRepository;
+	
+	@Autowired
+	CustomerOutstandingAmtRepo custAmtRepo;
 
 	@Autowired
 	CategorywiseConsumptionRepository categorywiseConsumptionRepository;
@@ -309,12 +314,32 @@ public class TestController {
 
 	@RequestMapping(value = "/getAllCustomerwiseReport", method = RequestMethod.POST)
 	public @ResponseBody List<CustomerwiseReport> getAllCustomerwiseReport(@RequestParam("fromDate") String fromDate,
-			@RequestParam("toDate") String toDate) {
+			@RequestParam("toDate") String toDate,@RequestParam("custId") int custId) {
 
 		List<CustomerwiseReport> catwiseConList;
 		try {
-			catwiseConList = customerwiseReportRepository.findCuswiseReport(fromDate, toDate);
-
+			if(custId==0)
+			{
+			catwiseConList = customerwiseReportRepository.findByAllCustwiseReport(fromDate, toDate);
+			List<CustomerRemAmt> remAmtList=custAmtRepo.findOutstandingAmt(fromDate, toDate);
+			for(int i=0;i<catwiseConList.size();i++)
+			{
+				for(int j=0;j<remAmtList.size();j++)
+				{
+					if(catwiseConList.get(i).getCustId()==remAmtList.get(j).getCustId())
+					{
+						catwiseConList.get(i).setOutstandingAmt(remAmtList.get(j).getOutstandingAmt());
+					}
+				}
+			}
+			}
+			else
+			{
+				catwiseConList = customerwiseReportRepository.findByCustwiseReport(fromDate, toDate,custId);
+				CustomerRemAmt remAmt=custAmtRepo.findOutstandingAmtOfCust(fromDate, toDate,custId);
+				catwiseConList.get(0).setOutstandingAmt(remAmt.getOutstandingAmt());
+			
+			}
 		} catch (Exception e) {
 			catwiseConList = new ArrayList<>();
 			e.printStackTrace();

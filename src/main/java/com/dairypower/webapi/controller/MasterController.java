@@ -847,6 +847,14 @@ public class MasterController {
 
 		return vehicleRes;
 	}
+	
+	@RequestMapping(value = { "/findOutKm" }, method = RequestMethod.POST)
+	public @ResponseBody VehicleRes findOutKm(@RequestParam("billTempId") int billTempId) {
+
+		VehicleRes vehicleRes = vehicleResRepository.findOutKm(billTempId);
+
+		return vehicleRes;
+	}
 	// ------------------------Update tvehicle inkm------------------------------------
 		@RequestMapping(value = { "/updateTvehicleKm" }, method = RequestMethod.POST)
 		public @ResponseBody Info updateTvehicleKm(@RequestParam int billTempId,@RequestParam int vehInKm) {

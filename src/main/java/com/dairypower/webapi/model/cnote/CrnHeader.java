@@ -36,9 +36,7 @@ public class CrnHeader implements Serializable{
     private int custId;
 	
 	private String custName;
-	
-	@Column(name="scrap_type")
-    private int scrapType;
+
 	
 	@Column(name="remarks")
     private String remarks;
@@ -72,10 +70,6 @@ public class CrnHeader implements Serializable{
 
 	public String getCustName() {
 		return custName;
-	}
-
-	public int getScrapType() {
-		return scrapType;
 	}
 
 	public String getRemarks() {
@@ -114,9 +108,6 @@ public class CrnHeader implements Serializable{
 		this.custName = custName;
 	}
 
-	public void setScrapType(int scrapType) {
-		this.scrapType = scrapType;
-	}
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
@@ -130,7 +121,7 @@ public class CrnHeader implements Serializable{
 	public String toString() {
 		return "CrnHeader [crnHeaderId=" + crnHeaderId + ", billTempId=" + billTempId + ", crnId=" + crnId
 				+ ", crnDate=" + crnDate + ", crnDatetime=" + crnDatetime + ", custId=" + custId + ", custName="
-				+ custName + ", scrapType=" + scrapType + ", remarks=" + remarks + ", creditNoteDetailList="
+				+ custName + ",  remarks=" + remarks + ", creditNoteDetailList="
 				+ creditNoteDetailList + "]";
 	}
 	
