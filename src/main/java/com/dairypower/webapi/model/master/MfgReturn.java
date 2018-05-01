@@ -2,6 +2,7 @@ package com.dairypower.webapi.model.master;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.dairypower.webapi.model.MfgReturnDetail;
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "t_mfg_return")
@@ -43,6 +46,9 @@ public class MfgReturn implements Serializable{
 	
 	@Column(name="crates_return_qty")
 	private int cratesReturnQty;
+	
+	@Transient
+	List<MfgReturnDetail> mfgReturnDetailList;
 
 	public int gettReturnId() {
 		return tReturnId;
@@ -114,11 +120,21 @@ public class MfgReturn implements Serializable{
 	public void setCratesReturnQty(int cratesReturnQty) {
 		this.cratesReturnQty = cratesReturnQty;
 	}
+	
+	public List<MfgReturnDetail> getMfgReturnDetailList() {
+		return mfgReturnDetailList;
+	}
+
+	public void setMfgReturnDetailList(List<MfgReturnDetail> mfgReturnDetailList) {
+		this.mfgReturnDetailList = mfgReturnDetailList;
+	}
+
 	@Override
 	public String toString() {
 		return "MfgReturn [tReturnId=" + tReturnId + ", date=" + date + ", datetime=" + datetime + ", batchId="
 				+ batchId + ", itemId=" + itemId + ", returnQty=" + returnQty + ", entryBy=" + entryBy + ", remark="
-				+ remark + ", cratesReturnQty=" + cratesReturnQty + "]";
+				+ remark + ", cratesReturnQty=" + cratesReturnQty + ", mfgReturnDetailList=" + mfgReturnDetailList
+				+ "]";
 	}
 	
 }

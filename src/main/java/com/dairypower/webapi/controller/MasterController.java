@@ -98,9 +98,7 @@ public class MasterController {
 	@Autowired
 	TVehicleRepository tVehicleRepository;
 
-	@Autowired
-	MfgReturnRepository mfgReturnRepository;
-
+	 
 	@Autowired
 	CurrencyRepository currencyRepository;
 
@@ -675,34 +673,7 @@ public class MasterController {
 
 	}
 
-	// --------------------------------------------------------------------------------------
-	// ----------------------------Save MfgReturn---------------------------
-	@RequestMapping(value = { "/saveMfgReturn" }, method = RequestMethod.POST)
-	public @ResponseBody Info saveMfgReturn(@RequestBody MfgReturn mfgReturn) {
-
-		MfgReturn mfgReturnRes = null;
-		Info info = new Info();
-		try {
-			mfgReturnRes = mfgReturnRepository.saveAndFlush(mfgReturn);
-
-			if (mfgReturnRes != null) {
-				info.setError(false);
-				info.setMessage("MfgReturn Saved Successfully.");
-			} else {
-				info.setError(true);
-				info.setMessage("MfgReturn Not Saved .");
-			}
-
-		} catch (Exception e) {
-
-			info.setError(true);
-			info.setMessage("MfgReturn Not Saved .");
-			e.printStackTrace();
-
-		}
-		return info;
-
-	}
+	 
 
 	// --------------------------------------------------------------------------------------
 	@RequestMapping(value = "/getAllRsHeader", method = RequestMethod.GET)

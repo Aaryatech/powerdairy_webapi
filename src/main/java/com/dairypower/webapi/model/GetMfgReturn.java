@@ -28,10 +28,7 @@ public class GetMfgReturn {
 	private String batchId;
 	
 	@Column(name="item_id")
-	private int itemId;
-	
-	@Column(name="item_name")
-	private String itemName;
+	private int itemId; 
 	
 	@Column(name="item_return_qty")
 	private int itemReturnQy;
@@ -88,17 +85,7 @@ public class GetMfgReturn {
 		this.itemId = itemId;
 	}
 
-	public String getItemName() {
-		return itemName;
-	}
-
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-	public int getItemReturnQy() {
-		return itemReturnQy;
-	}
+ 
 
 	public void setItemReturnQy(int itemReturnQy) {
 		this.itemReturnQy = itemReturnQy;
@@ -139,9 +126,8 @@ public class GetMfgReturn {
 	@Override
 	public String toString() {
 		return "GetMfgReturn [tReturnId=" + tReturnId + ", date=" + date + ", datetime=" + datetime + ", batchId="
-				+ batchId + ", itemId=" + itemId + ", itemName=" + itemName + ", itemReturnQy=" + itemReturnQy
-				+ ", cratesReturnQty=" + cratesReturnQty + ", entryBy=" + entryBy + ", userName=" + userName
-				+ ", remark=" + remark + "]";
+				+ batchId + ", itemId=" + itemId + ", itemReturnQy=" + itemReturnQy + ", cratesReturnQty="
+				+ cratesReturnQty + ", entryBy=" + entryBy + ", userName=" + userName + ", remark=" + remark + "]";
 	}
 	
 	
