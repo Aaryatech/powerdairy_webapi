@@ -13,7 +13,7 @@ import com.dairypower.webapi.model.bill.BillHeader;
 @Repository
 public interface BillHeaderRepository extends JpaRepository<BillHeader, Integer>{
 
-	@Query(value="select t_bill_header.* from t_bill_header where t_bill_header.bill_date=:date and t_bill_header.bill_temp_id in (select max(bill_temp_id) from t_bill_header group by cust_id)",nativeQuery=true)
+	@Query(value="select t_bill_header.* from t_bill_header where t_bill_header.bill_date=:date and t_bill_header.bill_temp_id in (select max(bill_temp_id) from t_bill_header where  t_bill_header.is_settled=1 group by cust_id)  ",nativeQuery=true)
 	List<BillHeader> getAllBillHeader(@Param("date")String date);
 
 	@Transactional

@@ -37,12 +37,22 @@ public class CrnHeader implements Serializable{
 	
 	private String custName;
 
+	private float grandTotal;
 	
 	@Column(name="remarks")
     private String remarks;
 
 	@Transient
 	List<CreditNoteDetails> creditNoteDetailList;
+
+	
+	public float getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setGrandTotal(float grandTotal) {
+		this.grandTotal = grandTotal;
+	}
 
 	public int getCrnHeaderId() {
 		return crnHeaderId;

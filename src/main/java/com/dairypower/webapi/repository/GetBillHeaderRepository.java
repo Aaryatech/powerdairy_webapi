@@ -22,6 +22,10 @@ public interface GetBillHeaderRepository extends JpaRepository<GetBillHeader, In
 	@Query(value="select t.bill_temp_id,t.bill_id,t.bill_date,t.cust_id,c.cust_name,t.veh_id,v.veh_name,t.collected_amt,t.outstanding_amt,t.collection_paymode, t.crates_op_bal,t.crates_issued,t.crates_received,t.crates_cl_bal,t.remarks,t.is_settled,t.grand_total from t_bill_header t,m_customer c,m_vehicle v where t.cust_id=c.cust_id and t.veh_id=v.veh_id and t.bill_date=:date and t.is_settled=:isSettled",nativeQuery=true)
 	List<GetBillHeader> getSettledBills(@Param("date")String date,@Param("isSettled")int isSettled);
 
+	@Query(value="select t.bill_temp_id,t.bill_id,t.bill_date,t.cust_id,c.cust_name,t.veh_id,v.veh_name,t.collected_amt,t.outstanding_amt,t.collection_paymode,\n" + 
+			"  t.crates_op_bal,t.crates_issued,t.crates_received,t.crates_cl_bal,t.remarks,t.is_settled,t.grand_total from t_bill_header t,m_customer c,m_vehicle v where t.cust_id=c.cust_id and t.veh_id=v.veh_id and t.bill_temp_id IN(:billTempIds)",nativeQuery=true)
+	List<GetBillHeader> findBillsById(@Param("billTempIds")List<String> billTempIds);
+
 
 
 }

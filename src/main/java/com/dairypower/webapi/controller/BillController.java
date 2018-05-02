@@ -161,6 +161,30 @@ public class BillController {
 
 			}
 			//--------------------------------------------------------------------------
+			// ----------------------------------------------------------------------
+						@RequestMapping(value = "/findBillsById", method = RequestMethod.POST)
+						public @ResponseBody List<GetBillHeader> findBillsById(@RequestParam("billTempIds") List<String> billTempIds) {
+
+							List<GetBillHeader> billHeaderList=null;
+							try {
+								billHeaderList= getBillHeaderRepository.findBillsById(billTempIds);
+								
+								for(int i=0;i<billHeaderList.size();i++)
+								{
+								List<GetBillDetail> billDetailList=getBillDetailRepository.findAllByBillTempId(billHeaderList.get(i).getBillTempId());
+								
+								billHeaderList.get(i).setBillDetailList(billDetailList);
+								}
+							}
+							catch (Exception e) {
+								billHeaderList=new ArrayList<>();
+								e.printStackTrace();
+
+							}
+							return billHeaderList;
+
+						}
+						//--------------------------------------------------------------------------
 			// --------------------------------------------------------------------------------------
 			@RequestMapping(value = "/getRsData", method = RequestMethod.POST)
 			public @ResponseBody RsDetail getRsData(@RequestParam("itemId") int itemId,@RequestParam("custId") int custId)  {

@@ -40,11 +40,22 @@ public class CreditNoteHeader implements Serializable{
 	
 	@Column(name="remarks")
     private String remarks;
+	
+	@Column(name="grand_total")
+    private float grandTotal;
 
 	@Transient
 	List<CreditNoteDetail> creditNoteDetailList;
 	
 	
+	public float getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setGrandTotal(float grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+
 	public int getBillTempId() {
 		return billTempId;
 	}
