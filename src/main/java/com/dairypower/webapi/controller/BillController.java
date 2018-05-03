@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dairypower.webapi.model.bill.BillDetail;
+import com.dairypower.webapi.model.bill.BillDetailReport;
 import com.dairypower.webapi.model.bill.BillHeader;
+import com.dairypower.webapi.model.bill.BillHeaderReport;
 import com.dairypower.webapi.model.bill.GetBillDetail;
 import com.dairypower.webapi.model.bill.GetBillHeader;
 import com.dairypower.webapi.model.master.GetBillHeaders;
@@ -22,7 +24,9 @@ import com.dairypower.webapi.model.master.RsDetail;
 import com.dairypower.webapi.model.master.TSetting;
 import com.dairypower.webapi.model.po.GetPoDetail;
 import com.dairypower.webapi.model.po.GetPoHeader;
+import com.dairypower.webapi.repository.BillDetailReportRepository;
 import com.dairypower.webapi.repository.BillDetailRepository;
+import com.dairypower.webapi.repository.BillHeaderReportRepository;
 import com.dairypower.webapi.repository.BillHeaderRepository;
 import com.dairypower.webapi.repository.GetBillDetailRepository;
 import com.dairypower.webapi.repository.GetBillHeaderRepository;
@@ -53,6 +57,12 @@ public class BillController {
 	
 	@Autowired
 	TSettingRepository tSettingRepository;
+	
+	@Autowired
+	BillDetailReportRepository billDetailReportRepository;
+	
+	@Autowired
+	BillHeaderReportRepository billHeaderReportRepository;
 	
 	// ----------------------------Save Bill---------------------------
 			@RequestMapping(value = { "/saveBill" }, method = RequestMethod.POST)
@@ -163,17 +173,17 @@ public class BillController {
 			//--------------------------------------------------------------------------
 			// ----------------------------------------------------------------------
 						@RequestMapping(value = "/findBillsById", method = RequestMethod.POST)
-						public @ResponseBody List<GetBillHeader> findBillsById(@RequestParam("billTempIds") List<String> billTempIds) {
+						public @ResponseBody List<BillHeaderReport> findBillsById(@RequestParam("billTempIds") List<String> billTempIds) {
 
-							List<GetBillHeader> billHeaderList=null;
+							List<BillHeaderReport> billHeaderList=null;
 							try {
-								billHeaderList= getBillHeaderRepository.findBillsById(billTempIds);
+								billHeaderList= billHeaderReportRepository.findBillsById(billTempIds);
 								
 								for(int i=0;i<billHeaderList.size();i++)
 								{
-								List<GetBillDetail> billDetailList=getBillDetailRepository.findAllByBillTempId(billHeaderList.get(i).getBillTempId());
+								List<BillDetailReport> billDetailReportList=billDetailReportRepository.findAllByBillTempId(billHeaderList.get(i).getBillTempId());
 								
-								billHeaderList.get(i).setBillDetailList(billDetailList);
+								billHeaderList.get(i).setBillDetailReportList(billDetailReportList);
 								}
 							}
 							catch (Exception e) {

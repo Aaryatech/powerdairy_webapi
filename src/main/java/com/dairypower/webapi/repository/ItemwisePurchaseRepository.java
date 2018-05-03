@@ -11,12 +11,7 @@ import com.dairypower.webapi.model.po.ItemwisePurchasereport;
 
 public interface ItemwisePurchaseRepository extends JpaRepository<ItemwisePurchasereport, Integer> {
 
-	@Query(value = " select\r\n" + "    d.item_id,\r\n" + "    i.item_name,\r\n"
-			+ "    sum(d.item_qty*d.rate) as total\r\n" + "    from \r\n" + "    t_po_details d,\r\n"
-			+ "    t_po_header h,\r\n" + "    m_item i \r\n" + "    where \r\n"
-			+ "    h.po_date between :fromDate and :toDate \r\n" + "    and d.item_id = i.item_id\r\n"
-			+ "    and d.po_header_id = h.po_header_id\r\n" + "    group by \r\n" + "    i.item_id"
-			+ "", nativeQuery = true)
+	@Query(value = " select  d.item_id,  i.item_name,sum(d.item_qty) as item_qty,SUM(short_no) as short_no,SUM(extra_no) as extra_no,SUM(po_leakage_qty) as po_leakage_qty,sum(d.item_qty*d.rate) as total  from  t_po_details d,t_po_header h,  m_item i  where h.po_date between :fromDate and :toDate  and d.item_id = i.item_id    and d.po_header_id = h.po_header_id   group by    i.item_id",nativeQuery=true)
 	List<ItemwisePurchasereport> findItemwiseReport(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 
 }
