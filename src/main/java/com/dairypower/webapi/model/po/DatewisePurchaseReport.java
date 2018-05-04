@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class DatewisePurchaseReport {
 	@Id
@@ -19,6 +21,7 @@ public class DatewisePurchaseReport {
 	public void setPoHeaderId(int poHeaderId) {
 		this.poHeaderId = poHeaderId;
 	}
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
 	public Date getPoDate() {
 		return poDate;
 	}

@@ -1,6 +1,5 @@
 package com.dairypower.webapi.model.po;
 
-import java.beans.Transient;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,8 +30,28 @@ public class CategorywiseConsumptionReport {
 	private float rate;
 
 	private String itemName;
+	
+	private int expireQty;
+	
+	private int leakageQty;
 
 	
+	public int getExpireQty() {
+		return expireQty;
+	}
+
+	public int getLeakageQty() {
+		return leakageQty;
+	}
+
+	public void setExpireQty(int expireQty) {
+		this.expireQty = expireQty;
+	}
+
+	public void setLeakageQty(int leakageQty) {
+		this.leakageQty = leakageQty;
+	}
+
 	public int getBillDetailId() {
 		return billDetailId;
 	}

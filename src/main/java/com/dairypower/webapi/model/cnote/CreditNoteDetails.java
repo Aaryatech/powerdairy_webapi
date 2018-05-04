@@ -1,6 +1,5 @@
 package com.dairypower.webapi.model.cnote;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +19,7 @@ public class CreditNoteDetails {
 	
     private int batchId;
 
-    private Date packDate;
+    private String packDate;
 	
     private int itemId;
     
@@ -74,7 +73,7 @@ public class CreditNoteDetails {
 		return batchId;
 	}
 
-	public Date getPackDate() {
+	public String getPackDate() {
 		return packDate;
 	}
 
@@ -104,7 +103,7 @@ public class CreditNoteDetails {
 		this.batchId = batchId;
 	}
 
-	public void setPackDate(Date packDate) {
+	public void setPackDate(String packDate) {
 		this.packDate = packDate;
 	}
 
