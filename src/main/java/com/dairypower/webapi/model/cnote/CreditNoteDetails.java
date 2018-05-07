@@ -17,7 +17,7 @@ public class CreditNoteDetails {
 	
     private int crnHeaderId;
 	
-    private int batchId;
+    private String batchId;
 
     private String packDate;
 	
@@ -69,7 +69,7 @@ public class CreditNoteDetails {
 		return crnHeaderId;
 	}
 
-	public int getBatchId() {
+	public String getBatchId() {
 		return batchId;
 	}
 
@@ -99,7 +99,7 @@ public class CreditNoteDetails {
 		this.crnHeaderId = crnHeaderId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(String batchId) {
 		this.batchId = batchId;
 	}
 

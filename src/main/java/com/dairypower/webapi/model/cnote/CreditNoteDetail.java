@@ -25,7 +25,7 @@ public class CreditNoteDetail implements Serializable{
     private int crnHeaderId;
 	
 	@Column(name="batch_id")
-    private int batchId;
+    private String batchId;
 
 	@Column(name="pack_date")
     private String packDate;
@@ -61,11 +61,11 @@ public class CreditNoteDetail implements Serializable{
 		this.crnHeaderId = crnHeaderId;
 	}
 
-	public int getBatchId() {
+	public String getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(String batchId) {
 		this.batchId = batchId;
 	}
 	 
