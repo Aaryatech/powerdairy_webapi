@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dairypower.webapi.model.master.Info;
 import com.dairypower.webapi.model.po.GetPoDetail;
 import com.dairypower.webapi.model.po.GetPoHeader;
 import com.dairypower.webapi.model.po.PoDetail;
@@ -224,6 +225,26 @@ public class PoController {
 
 			}
 			return poDetailList;
+
+		}
+		
+		@RequestMapping(value = "/deletePurchaseBill", method = RequestMethod.POST)
+		public @ResponseBody Info deletePurchaseBill(@RequestParam("poHeaderId") int poHeaderId) {
+
+			Info delete  = new Info();
+			try {
+				 
+				 poHeaderRepository.deletePo(poHeaderId);
+				 poDetailRepository.deletePoDetail(poHeaderId);
+				
+				 
+			}
+			catch (Exception e) {
+				 
+				e.printStackTrace();
+
+			}
+			return delete;
 
 		}
 }
